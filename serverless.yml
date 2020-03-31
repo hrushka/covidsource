@@ -1,0 +1,69 @@
+# Welcome to Serverless!
+#™
+# This file is the main config file for your service.
+# It's very minimal at this point and uses default values.
+# You can always add more config options for more control.
+# We've included some commented out config examples here.
+# Just uncomment any of them to get that config option.
+#
+# For full config options, check the docs:
+#    docs.serverless.com
+#
+# Happy Coding!
+
+service: covidsource
+# app and org for use with dashboard.serverless.com
+#app: your-app-name
+#org: your-org-name
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  tag: c19.dev
+
+# Added in to support the API going out on our custom domain
+#
+plugins:
+  - serverless-domain-manager
+
+# Added in to support the API going out on our custom domain
+#
+custom:
+
+  # Pull in config file for custom vars per stage
+  stage: ${opt:stage, self:provider.stage}
+  stageConfig: ${file(./serverconfig.yaml):${self:custom.stage}}
+
+  customDomain:
+    domainName: ${self:custom.stageConfig.domainName}
+    state: ${self:provider.stage}
+    basePath: ''
+    createRoute53Record: true
+
+# The list of functions for the domain
+#
+functions:
+  test:
+    handler: functions/test.run
+    events:
+      - http:
+          path: /
+          method: get
+  search:
+    handler: functions/search.run
+    events:
+      - http:
+          path: search
+          method: post
+  query:
+    handler: functions/query.run
+    events:
+      - http:
+          path: query
+          method: post
+  annotations:
+    handler: functions/annotations.run
+    events:
+      - http:
+          path: annotations
+          method: post

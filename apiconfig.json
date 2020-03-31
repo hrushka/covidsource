@@ -1,0 +1,13 @@
+{
+  "states": {
+    "_comment": "Historical US State data from The COVID Tracking Project. Updated daily at 4PM ET.",
+    "endpoint": "https://covidtracking.com/api/states/daily",
+    "metrics": [
+      "totalTestResults",
+      "positive",
+      "negative",
+      "pending",
+      "death"
+    ]
+  }
+}
