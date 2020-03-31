@@ -1,5 +1,7 @@
 dev:
   domainName: dev.c19api.com
+  cfnRole: arn:aws:iam::147242443528:role/SFProRole-default
 
 prod:
   domainName: c19api.com
+  cfnRole: arn:aws:iam::147242443528:role/SFProRole-default

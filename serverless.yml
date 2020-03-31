@@ -12,14 +12,14 @@
 # Happy Coding!
 
 service: covidsource
-# app and org for use with dashboard.serverless.com
-#app: your-app-name
-#org: your-org-name
+app: covidsource
+org: hrushka
 
 provider:
   name: aws
   runtime: nodejs12.x
   tag: c19.dev
+  cfnRole: ${self:custom.stageConfig.cfnRole}
 
 # Added in to support the API going out on our custom domain
 #
