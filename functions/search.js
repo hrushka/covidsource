@@ -20,6 +20,6 @@ module.exports.run = async event => {
 
     return {
         statusCode: 200,
-        body: JSON.stringify(config.states.metrics),
+        body: JSON.stringify(metrics),
     }
 }
