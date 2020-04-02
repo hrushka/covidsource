@@ -19,8 +19,7 @@ provider:
   name: aws
   runtime: nodejs12.x
   tag: c19.dev
-  cfnRole: ${self:custom.stageConfig.cfnRole}
-
+  #cfnRole: ${self:custom.stageConfig.cfnRole}
 # Added in to support the API going out on our custom domain
 #
 plugins:

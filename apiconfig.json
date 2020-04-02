@@ -1,13 +1,45 @@
 {
-  "states": {
-    "_comment": "Historical US State data from The COVID Tracking Project. Updated daily at 4PM ET.",
-    "endpoint": "https://covidtracking.com/api/states/daily",
-    "metrics": [
-      "totalTestResults",
-      "positive",
-      "negative",
-      "pending",
-      "death"
-    ]
+  "country": {
+    "us": {
+      "_comment": "Historical US data from The COVID Tracking Project. Updated daily at 4PM ET.",
+      "endpoint": "https://covidtracking.com/api/us/daily",
+      "metrics": [
+        "state",
+        "positive",
+        "positiveIncrease",
+        "negative",
+        "negativeIncrease",
+        "pending",
+        "totalTestResults",
+        "totalTestResultsIncrease",
+        "hospitalized",
+        "hospitalizedIncrease",
+        "death",
+        "deathIncrease",
+        "population",
+        "density",
+        "testsPerThousand"
+      ],
+      "states": {
+        "_comment": "Historical US State data from The COVID Tracking Project. Updated daily at 4PM ET.",
+        "endpoint": "https://covidtracking.com/api/states/daily",
+        "metrics": [
+          "positive",
+          "positiveIncrease",
+          "negative",
+          "negativeIncrease",
+          "pending",
+          "totalTestResults",
+          "totalTestResultsIncrease",
+          "hospitalized",
+          "hospitalizedIncrease",
+          "death",
+          "deathIncrease",
+          "population",
+          "density",
+          "testsPerThousand"
+        ]
+      }
+    }
   }
 }

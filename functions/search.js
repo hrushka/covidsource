@@ -10,7 +10,13 @@ const config = require('../apiconfig.json')
   * @param {object} $event - nothing useful
   * @return {object} - a JSON object representing an HTTP response
 */
-module.exports.run = async _ => {
+module.exports.run = async event => {
+
+    const params = JSON.parse(event.body)
+    let state = (params.scopedVars) ? params.scopedVars.state.value.toUpperCase() : "ALL"
+    
+    const state_only = (state !== "ALL")
+    const metrics = state_only ? config.country.us.states.metrics : config.country.us.metrics
 
     return {
         statusCode: 200,
