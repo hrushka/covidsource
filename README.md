@@ -18,8 +18,8 @@ You can use the current version of the API below. It will have more limited feat
 | -----------------: | --------------------- | ------------------------- |
 |        **Feature** | `https://c19api.com/` | `https://dev.c19api.com/` |
 |      US State Data | `Yes`                 | `Yes`                     |
-|   US National Data | `No`                  | `No`                      |
-|        Census Data | `No`                  | `No`                      |
+|   US National Data | `No`                  | `Yes`                      |
+|        Census Data | `No`                  | `Yes`                      |
 | International Data | `No`                  | `No`                      |
 
 ### contribute to the development / on your own
