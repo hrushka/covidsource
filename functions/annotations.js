@@ -2,7 +2,8 @@
 
 const fetch = require('node-fetch')
 const moment = require('moment')
-const ihme_data = require('../static/us_ihme.json')
+const data_ihme = require('../static/us_ihme.json')
+const data_states = require('../static/us_states.json')
 
 /**
   * Returns a list of annotations for the specified metrics and time frame
@@ -15,13 +16,17 @@ module.exports.run = (event, _, callback) => {
 
   const params = JSON.parse(event.body)
 
+  console.log(params)
+
   // Get the times to filter by
   const time_from = moment(params.range.from).unix() * 1000
   const time_to = moment(params.range.to).unix() * 1000
 
-  const state = (params.variables.state) ? params.variables.state.value.toUpperCase() : "ALL"
+  let state = (params.variables) ? params.variables.state.value : "ALL"
+  state = (state !== "ALL" && data_states[state]) ? data_states[state].toUpperCase() : false
+
   const query = params.annotation.query || false
-  const ihmeid = ihme_data.states[state] || false
+  const ihmeid = data_ihme.states[state] || false
 
   console.log(state, query, ihmeid)
 
@@ -46,7 +51,7 @@ module.exports.run = (event, _, callback) => {
 
         console.log(e)
 
-        const tag = ihme_data.tags[`${e.covid_intervention_measure_id}`] || false
+        const tag = data_ihme.tags[`${e.covid_intervention_measure_id}`] || false
         const timestamp = moment(e.date_reported, 'YYYY-MM-DD HH:mm:ss').unix() * 1000
 
         if (query !== false && query !== tag)

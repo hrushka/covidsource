@@ -6,6 +6,7 @@ const moment = require('moment')
 // Common API Configuration
 const config = require('../apiconfig.json')
 const data_census = require('../static/us_census.json')
+const data_states = require('../static/us_states.json')
 
 /**
   * Returns a list of data for the specified metrics and time frame
@@ -19,14 +20,16 @@ module.exports.run = (event, _, callback) => {
 
     const params = JSON.parse(event.body)
 
-    let state = (params.scopedVars) ? params.scopedVars.state.value.toUpperCase() : "ALL"
+    console.log(params)
+
+    let state = (params.scopedVars) ? params.scopedVars.state.value : "ALL"
+    state = (state !== "ALL" && data_states[state]) ? data_states[state].toUpperCase() : false
+
     let targets = {}
 
     params.targets.forEach(e => {
         targets[e.target] = []
     })
-
-    console.log(event)
 
     // Are we asking for a state or the full country?
     const state_only = (state !== "ALL")

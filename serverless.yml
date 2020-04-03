@@ -66,3 +66,15 @@ functions:
       - http:
           path: annotations
           method: post
+  tag-keys:
+    handler: functions/tag-keys.run
+    events:
+      - http:
+          path: tag-keys
+          method: post
+  tag-values:
+    handler: functions/tag-values.run
+    events:
+      - http:
+          path: tag-values
+          method: post
