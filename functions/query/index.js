@@ -4,9 +4,13 @@ const fetch = require('node-fetch')
 const moment = require('moment')
 
 // Common API Configuration
-const config = require('../apiconfig.json')
-const data_census = require('../static/us_census.json')
-const data_states = require('../static/us_states.json')
+const config = require('../../apiconfig.json')
+
+// Static Data
+const data_states = require('../../static/us_states.json')
+
+// Utilities
+const utils = require('./utils')
 
 /**
   * Returns a list of data for the specified metrics and time frame
@@ -20,16 +24,9 @@ module.exports.run = (event, _, callback) => {
 
     const params = JSON.parse(event.body)
 
-    console.log(params)
-
+    // Get the state, if none treat it as all US
     let state = (params.scopedVars) ? params.scopedVars.state.value : "ALL"
-    state = (state !== "ALL" && data_states[state]) ? data_states[state].toUpperCase() : false
-
-    let targets = {}
-
-    params.targets.forEach(e => {
-        targets[e.target] = []
-    })
+    state = (state !== "ALL" && data_states[state]) ? data_states[state].toUpperCase() : state
 
     // Are we asking for a state or the full country?
     const state_only = (state !== "ALL")
@@ -42,14 +39,11 @@ module.exports.run = (event, _, callback) => {
         .then(res => res.json())
         .then(json => {
 
-            let results = []
-
             // Get the times to filter by
             const time_from = moment(params.range.from).unix() * 1000
             const time_to = moment(params.range.to).unix() * 1000
 
-            // Static Metrics
-            const sc_data = data_census[state]
+            let target_data = {}
 
             json.forEach(e => {
                 const unix_time = moment(e.date, 'YYYYMMDD').unix() * 1000
@@ -59,32 +53,22 @@ module.exports.run = (event, _, callback) => {
                     return
                 }
 
-                for (const prop in targets) {
-                    if(prop == 'density' || prop == 'population'){
-                        targets[prop].push([sc_data[prop], unix_time])
-                    } else if (prop == 'testsPerThousand') {
+                params.targets.forEach(t => {
+                    
+                    const { target, type, data } = t
 
-                        const n_ttr = e.totalTestResults
-                        const n_pop = sc_data.population
-
-                        const tpc = n_ttr / (n_pop / 1000)
-
-                        targets[prop].push([tpc, unix_time])
-
-                    } else {
-                        targets[prop].push([e[prop], unix_time])
+                    if(target_data[target] === undefined){
+                        target_data[target] = []
                     }
-                }
+
+                    // Pull the metric from the data directly, or compute it if 
+                    // it's not in the original set
+                    let metric = e[target] || utils.computeMetric(state, target, e)
+                    target_data[target].push([metric, unix_time])
+                })
             })
 
-            // Re-format the data into the JSON data source structure
-            for (const prop in targets) {
-                results.push({
-                    target: prop,
-                    datapoints: targets[prop]
-                })
-            }
-            
+            const results = utils.formatResults(state, params.targets, target_data)
             const response = {
                 statusCode: 200,
                 body: JSON.stringify(results),

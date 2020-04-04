@@ -43,37 +43,37 @@ custom:
 #
 functions:
   test:
-    handler: functions/test.run
+    handler: handler.test
     events:
       - http:
           path: /
           method: get
   search:
-    handler: functions/search.run
+    handler: handler.search
     events:
       - http:
           path: search
           method: post
   query:
-    handler: functions/query.run
+    handler: handler.query
     events:
       - http:
           path: query
           method: post
   annotations:
-    handler: functions/annotations.run
+    handler: handler.annotations
     events:
       - http:
           path: annotations
           method: post
   tag-keys:
-    handler: functions/tag-keys.run
+    handler: handler.tagKeys
     events:
       - http:
           path: tag-keys
           method: post
   tag-values:
-    handler: functions/tag-values.run
+    handler: handler.tagValues
     events:
       - http:
           path: tag-values

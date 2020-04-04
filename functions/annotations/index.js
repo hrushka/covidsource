@@ -2,8 +2,8 @@
 
 const fetch = require('node-fetch')
 const moment = require('moment')
-const data_ihme = require('../static/us_ihme.json')
-const data_states = require('../static/us_states.json')
+const data_ihme = require('../../static/us_ihme.json')
+const data_states = require('../../static/us_states.json')
 
 /**
   * Returns a list of annotations for the specified metrics and time frame

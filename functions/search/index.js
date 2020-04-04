@@ -1,9 +1,9 @@
 'use strict'
 
 // Common API Configuration
-const config = require('../apiconfig.json')
+const config = require('../../apiconfig.json')
 
-const data_states = require('../static/us_states.json')
+const data_states = require('../../static/us_states.json')
 
 /**
   * Returns a list of metrics available
