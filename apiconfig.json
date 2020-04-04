@@ -18,7 +18,10 @@
         "deathIncrease",
         "population",
         "density",
-        "testsPerThousand"
+        "testsPerThousand",
+        "prevalenceRate",
+        "incidenceRate",
+        "caseFatalityRate"
       ],
       "states": {
         "_comment": "Historical US State data from The COVID Tracking Project. Updated daily at 4PM ET.",
@@ -37,7 +40,10 @@
           "deathIncrease",
           "population",
           "density",
-          "testsPerThousand"
+          "testsPerThousand",
+          "prevalenceRate",
+          "incidenceRate",
+          "caseFatalityRate"
         ]
       }
     }
