@@ -1,0 +1,16 @@
+{
+    "sources": {
+        "ctp": {
+            "name": "The Covid Tracking Project",
+            "url": "https://covidtracking.com/",
+            "Descripion": "",
+            "dataUrl": "https://covidtracking.com/api/v1/states/daily.csv"
+        },
+        "us_census": {
+            "name": "The United States Census (2019 State & County Populations)",
+            "url":"https://census.gov",
+            "Description": "",
+            "dataUrl":"https://api.census.gov/data/2019/pep/population?get=NAME,COUNTY,STATE,DENSITY,POP&for=county:*"
+        }
+    }
+}

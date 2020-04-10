@@ -1,8 +1,8 @@
 'use strict'
 
 // Static Data
-const data_census = require('../../static/us_census.json')
-const data_geos = require('../../static/us_geohashes.json')
+const data_census = require('../../../static/us_census.json')
+const data_geos = require('../../../static/us_geohashes.json')
 
 /**
   * Formats the results based on the "type" specified by Grafana (table | timeseries)

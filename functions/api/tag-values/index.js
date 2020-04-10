@@ -1,6 +1,6 @@
 'use strict'
 
-const state_data = require('../../static/us_states.json')
+const state_data = require('../../../static/us_states.json')
 
 /**
   * Returns a list of metrics available

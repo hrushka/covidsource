@@ -1,0 +1,34 @@
+{
+    "name": "us_data",
+    "fields": {
+        "hash": {
+            "type": "string",
+            "maxLength": 32,
+            "primary_key": true
+        },
+        "state_full": {
+            "type": "string",
+            "maxLength": 50
+        },
+        "state_abbv": {
+            "type": "string",
+            "maxLength": 2
+        },
+        "county_full": {
+            "type": "string",
+            "maxLength": 50
+        },
+        "usc_state_id": {
+            "type": "int"
+        },
+        "usc_county_id": {
+            "type": "int"
+        },
+        "usc_density_2019": {
+            "type": "double"
+        },
+        "usc_population_2019": {
+            "type": "double"
+        }
+    }
+}

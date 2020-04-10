@@ -4,10 +4,10 @@ const fetch = require('node-fetch')
 const moment = require('moment')
 
 // Common API Configuration
-const config = require('../../apiconfig.json')
+const config = require('../../../apiconfig.json')
 
 // Static Data
-const data_states = require('../../static/us_states.json')
+const data_states = require('../../../static/us_states.json')
 
 // Utilities
 const utils = require('./utils')

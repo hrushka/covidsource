@@ -1,0 +1,85 @@
+{
+    "name": "ctp",
+    "fields": {
+        "date": {
+            "type": "timestamp",
+            "format": "YYYYMMDD"
+        },
+        "state": {
+            "type": "string",
+            "maxLength": 2
+        },
+        "positive": {
+            "type": "int"
+        },
+        "negative": {
+            "type": "int"
+        },
+        "pending": {
+            "type": "int"
+        },
+        "hospitalizedCurrently": {
+            "type": "int"
+        },
+        "hospitalizedCumulative": {
+            "type": "int"
+        },
+        "inIcuCurrently": {
+            "type": "int"
+        },
+        "inIcuCumulative": {
+            "type": "int"
+        },
+        "onVentilatorCurrently": {
+            "type": "int"
+        },
+        "onVentilatorCumulative": {
+            "type": "int"
+        },
+        "recovered": {
+            "type": "int"
+        },
+        "hash": {
+            "type": "string",
+            "maxLength": 50,
+            "primary_key": true
+        },
+        "dateChecked": {
+            "type": "timestamp",
+            "format": "moment.ISO_8601"
+        },
+        "death": {
+            "type": "int"
+        },
+        "hospitalized": {
+            "type": "int"
+        },
+        "total": {
+            "type": "int"
+        },
+        "totalTestResults": {
+            "type": "int"
+        },
+        "posNeg": {
+            "type": "int"
+        },
+        "fips": {
+            "type": "int"
+        },
+        "deathIncrease": {
+            "type": "int"
+        },
+        "hospitalizedIncrease": {
+            "type": "int"
+        },
+        "negativeIncrease": {
+            "type": "int"
+        },
+        "positiveIncrease": {
+            "type": "int"
+        },
+        "totalTestResultsIncrease": {
+            "type": "int"
+        }
+    }
+}
