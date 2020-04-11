@@ -22,8 +22,8 @@ module.exports.run = (event, _, callback) => {
   const time_from = moment(params.range.from).unix() * 1000
   const time_to = moment(params.range.to).unix() * 1000
 
-  let state = (params.variables) ? params.variables.state.value : "ALL"
-  state = (state !== "ALL" && data_states[state]) ? data_states[state].toUpperCase() : false
+  let state = (params.variables) ? params.variables.state.value : ","
+  state = (state.indexOf(',') < 0) ? state.toUpperCase() : false
 
   const query = params.annotation.query || false
   const ihmeid = data_ihme.states[state] || false
