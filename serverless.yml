@@ -94,9 +94,14 @@ functions:
     timeout: 30
     events:
       - schedule: rate(1 hour)
-  ingest_us_data:
-    handler: handler_data.ingest_us_data
+  ingest_us:
+    handler: handler_data.ingest_us
     timeout: 30
+  ingest_nyt:
+    handler: handler_data.ingest_nyt
+    timeout: 30
+    events:
+      - schedule: rate(3 hours)
 
   # API Endpoints for the c19api.com domain
   #

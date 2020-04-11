@@ -11,6 +11,12 @@
             "url":"https://census.gov",
             "Description": "",
             "dataUrl":"https://api.census.gov/data/2019/pep/population?get=NAME,COUNTY,STATE,DENSITY,POP&for=county:*"
+        },
+        "nyt_counties":{
+            "name":"New York Times County Data",
+            "url":"https://github.com/nytimes/covid-19-data",
+            "Description":"",
+            "dataUrl":"https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-counties.csv"
         }
     }
 }

@@ -1,0 +1,32 @@
+{
+    "name": "nyt_county",
+    "fields": {
+        "hash": {
+            "type": "string",
+            "maxLength": 32,
+            "primary_key": true
+        },
+        "date": {
+            "type": "timestamp",
+            "format": "YYYY-MM-DD"
+        },
+        "county": {
+            "type": "string",
+            "maxLength": 50
+        },
+        "state": {
+            "type": "string",
+            "maxLength": 50
+        },
+        "state_abbv": {
+            "type": "string",
+            "maxLength": 2
+        },
+        "cases": {
+            "type": "int"
+        },
+        "deaths": {
+            "type": "int"
+        }
+    }
+}
