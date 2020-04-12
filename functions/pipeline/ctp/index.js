@@ -1,7 +1,6 @@
 'use strict'
 
 const fetch = require('node-fetch')
-const moment = require('moment')
 const parse = require('csv-parse/lib/sync')
 const { Datastore } = require('../../../utils')
 
@@ -26,14 +25,10 @@ module.exports.run = async _ => {
     skip_empty_lines: true
   })
 
-  const t_s = moment().unix() * 1000
-
   // Initialize Database if it hasn't been
   await Datastore.init(schema)
-  await Datastore.insert(schema,records)
+  await Datastore.insert(schema, records)
 
-  const t_e = moment().unix() * 1000
+  return { success: true }
 
-  return {success:true, milliseconds:t_e-t_s}
- 
 }

@@ -1,9 +1,7 @@
 'use strict'
 
 const fetch = require('node-fetch')
-const moment = require('moment')
 const crypto = require('crypto')
-
 const { Datastore } = require('../../../utils')
 
 // Import the pipeline config
@@ -26,13 +24,13 @@ module.exports.run = async _ => {
   const input = await response.json()
 
   let records = []
-  for(var set of input){
-    if(set[0] == "NAME"){
+  for (var set of input) {
+    if (set[0] == "NAME") {
       continue
     }
 
     const names = set[0].split(', ')
-    
+
     records.push({
       hash: crypto.createHash('md5').update(set[0]).digest("hex"),
       state_full: names[1],
@@ -46,14 +44,10 @@ module.exports.run = async _ => {
 
   }
 
-  const t_s = moment().unix() * 1000
-
   // Initialize Database if it hasn't been
   await Datastore.init(schema)
-  await Datastore.insert(schema,records)
+  await Datastore.insert(schema, records)
 
-  const t_e = moment().unix() * 1000
+  return { success: true }
 
-  return {success:true, milliseconds:t_e-t_s}
- 
 }

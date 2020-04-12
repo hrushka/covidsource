@@ -1,15 +1,14 @@
-# Welcome to Serverless!
-#™
-# This file is the main config file for your service.
-# It's very minimal at this point and uses default values.
-# You can always add more config options for more control.
-# We've included some commented out config examples here.
-# Just uncomment any of them to get that config option.
+# The CovidSource Project
 #
-# For full config options, check the docs:
-#    docs.serverless.com
+# This file is the main config file. There is another
+# file referenced that you'll need in the project before
+# you are able to deploy: serverconfig.yaml. This file
+# should contain your secrets and datastore name.
 #
-# Happy Coding!
+# For full explination and samples, check the docs:
+#    https://github.com/hrushka/covidsource
+#
+# Stay safe.
 
 service: covidsource
 app: covidsource
@@ -57,9 +56,7 @@ custom:
     PORT:
       Fn::GetAtt: [AuroraRDSCluster, Endpoint.Port]
     VPC_CIDR: 10
-  #cfnRole: ${self:custom.stageConfig.cfnRole}
-# Added in to support the API going out on our custom domain
-#
+
 plugins:
   - serverless-domain-manager
   - serverless-pseudo-parameters
@@ -85,59 +82,18 @@ resources:
     AuroraRDSCluster: ${file(./resource/AuroraRDSCluster.yml)}
     AuroraRDSInstance: ${file(./resource/AuroraRDSInstance.yml)}
 
-# The list of functions for the domain
-#
 functions:
   # Data ingestion pipeline functions
   ingest_ctp:
-    handler: handler_data.ingest_ctp
+    handler: handler.ingest_ctp
     timeout: 30
     events:
       - schedule: rate(1 hour)
   ingest_us:
-    handler: handler_data.ingest_us
+    handler: handler.ingest_us
     timeout: 30
   ingest_nyt:
-    handler: handler_data.ingest_nyt
+    handler: handler.ingest_nyt
     timeout: 30
     events:
       - schedule: rate(3 hours)
-
-  # API Endpoints for the c19api.com domain
-  #
-  test:
-    handler: handler_api.test
-    events:
-      - http:
-          path: /
-          method: get
-  search:
-    handler: handler_api.search
-    events:
-      - http:
-          path: search
-          method: post
-  query:
-    handler: handler_api.query
-    events:
-      - http:
-          path: query
-          method: post
-  annotations:
-    handler: handler_api.annotations
-    events:
-      - http:
-          path: annotations
-          method: post
-  tag-keys:
-    handler: handler_api.tagKeys
-    events:
-      - http:
-          path: tag-keys
-          method: post
-  tag-values:
-    handler: handler_api.tagValues
-    events:
-      - http:
-          path: tag-values
-          method: post

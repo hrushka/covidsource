@@ -1,28 +1,23 @@
 # covidsource
 
-The `covidsource` project is an API wrapper library for [The COVID Tracking Project](https://covidtracking.com/)'s API. The wrapper is a real-time passthrough set of APIs developed on AWS using the [serverless](https://serverless.com/) framework meant to be ingested into [Grafana](https://grafana.com/).
+The `covidsource` project is broken up into two distinct pieces:
 
-The API augments the data with other sources and reformats the information to be injested by Grafana using the [JSON datasource](https://grafana.com/plugins/simpod-json-datasource) ([repo](https://github.com/simPod/grafana-json-datasource)).
+1. An ETL pipeline using [AWS](https://aws.amazon.com/) and the [serverless](https://serverless.com/) framework to continually ingest available COVID-19 data into an [RDS Aurora](https://aws.amazon.com/rds/aurora/) datastore.
+2. A set of [Grafana](https://grafana.com/) dashboards to visualize the data.
 
-## how to use the project
+The ETL source code and Grafana dashboards will be backed up and stored here. I will also be providing helpful links to static data is used in this project.
 
-### the dashboards
+## the sources of data
 
-While you can use the APIs to make your own, the projects dashboards can be seen at: https://c19.grafana.net
+Below are the current data sources being populated.
 
-### use the APIs
+|                    | Website          | Function Name | Data         |
+| -----------------: | --------------------- | ------------------------- | ------------------------- |
+|        The Covid Tracking Project | [covidtracking.com](https://covidtracking.com/) | ingest_ctp | [CSV](https://covidtracking.com/api/v1/states/daily.csv) |
+| US Census Data / 2019 projections | [census.gov](https://www.census.gov/) | ingest_us | [API](https://api.census.gov/data/2019/pep/population?get=NAME,COUNTY,STATE,DENSITY,POP&for=county:*) |
+|        New York Times County Data | [nyt.com](https://www.nytimes.com/article/coronavirus-county-data-us.html) | ingest_nyt    | [CSV](https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-counties.csv) |
 
-You can use the current version of the API below. It will have more limited features than the development version, but will remain fairly stable.
-
-|                    | Stable                | Development               |
-| -----------------: | --------------------- | ------------------------- |
-|        **Feature** | `https://c19api.com/` | `https://dev.c19api.com/` |
-|      US State Data | `Yes`                 | `Yes`                     |
-|   US National Data | `No`                  | `Yes`                      |
-|        Census Data | `No`                  | `Yes`                      |
-| International Data | `No`                  | `No`                      |
-
-### contribute to the development / on your own
+## use & contribute
 
 You can contribute or fork the code to fit your needs. Just use the following steps:
 
@@ -40,18 +35,47 @@ You can contribute or fork the code to fit your needs. Just use the following st
 
 5. Switch to the folder.
 
-6. Install the dependencies
+6. You will need to create a `serverconfig.yaml` file that contains your secrets. The format is as follows:
+
+   ```yaml
+   dev:
+     database:
+       name: c19_dev_db_example
+       username: c19_user
+       password: superstrongpassword
+     cfnRole: arn:aws:iam::00000000:role/your-own-special-lambda-role
+   
+   prod:
+     database:
+       name: c19_prod_db_example
+       username: c19_user
+       password: superstrongpassword
+     cfnRole: arn:aws:iam::00000000:role/your-own-special-lambda-role
+   ```
+
+   
+
+7. Install the dependencies
 
    ```bash
    npm i
    ```
-6. Deploy the API
+
+8. Deploy the API
 
    ```bash
    sls deploy
    ```
-   
+
    *Keep in mind here, that I've got my serverless.yaml configured to use the custom domain (which you will not be able to use, but I'm leaving the config in the file so you can see how I did it.)*
+
+9. Seed the database. Some ETL lambdas run on a schedule, but if you'd like to run them immediately to seed the database, you can do so by running the commands manually using the `invoke` function (see the table above).
+
+   ```bash
+   sls invoke -f [function name]
+   ```
+
+   
 
 ## follow the live build
 

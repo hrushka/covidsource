@@ -55,10 +55,10 @@ class Datastore {
                         value = (value === "") ? "null" : +value
                         break
                     case "string":
-                        if(!value){
+                        if (!value) {
                             value = "null"
                         } else {
-                            value = `'${value.replace("'","''")}'`
+                            value = `'${value.replace("'", "''")}'`
                         }
                     default:
                 }

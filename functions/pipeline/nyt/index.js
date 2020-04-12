@@ -2,7 +2,6 @@
 
 const fetch = require('node-fetch')
 const crypto = require('crypto')
-const moment = require('moment')
 const parse = require('csv-parse/lib/sync')
 const { Datastore } = require('../../../utils')
 
@@ -31,7 +30,7 @@ module.exports.run = async _ => {
   })
 
   // Augment data with state abbreviation for quicker lookup and hash for primary key
-  for(var r in records){
+  for (var r in records) {
 
     const rec = records[r]
     const hash_id = `${rec.date}_${rec.county}_${rec.state}`
@@ -40,14 +39,10 @@ module.exports.run = async _ => {
     records[r].state_abbv = data_states[rec.state]
   }
 
-  const t_s = moment().unix() * 1000
-
   // Initialize Database if it hasn't been
   await Datastore.init(schema)
-  await Datastore.insert(schema,records)
+  await Datastore.insert(schema, records)
 
-  const t_e = moment().unix() * 1000
+  return { success: true }
 
-  return {success:true, milliseconds:t_e-t_s}
- 
 }
