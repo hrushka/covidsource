@@ -41,12 +41,6 @@ custom:
     includeLayers: true
     number: 3
     
-  customDomain:
-    domainName: ${self:custom.stageConfig.domainName}
-    state: ${self:provider.stage}
-    basePath: ''
-    createRoute53Record: true
-    
   DB_NAME: ${self:custom.stageConfig.database.name}
   USERNAME: ${self:custom.stageConfig.database.username}
   PASSWORD: ${self:custom.stageConfig.database.password}
@@ -58,7 +52,6 @@ custom:
     VPC_CIDR: 10
 
 plugins:
-  - serverless-domain-manager
   - serverless-pseudo-parameters
   - serverless-prune-plugin
 resources:
