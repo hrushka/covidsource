@@ -17,6 +17,13 @@
             "url":"https://github.com/nytimes/covid-19-data",
             "Description":"",
             "dataUrl":"https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-counties.csv"
+        },
+        "apple":{
+            "name":"Apple Mobility Trends Reports",
+            "url":"https://www.apple.com/covid19/mobility",
+            "Description":"COVID⁠-⁠19 mobility trends in countries/regions and cities. Reports are published daily and reflect requests for directions in Apple Maps.",
+            "metadataUrl":"https://covid19-static.cdn-apple.com/covid19-mobility-data/current/v1/index.json",
+            "dataUrl":"https://covid19-static.cdn-apple.com"
         }
     }
 }

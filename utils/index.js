@@ -73,12 +73,7 @@ class Datastore {
 
                 console.log({ batch_count: batch.length, data_count })
 
-                const updated = []
-                for (var f of fields) {
-                    updated.push(`${f} = VALUES(${f})`)
-                }
-
-                const query = `INSERT INTO ${table_prefix}${schema.name} (${fields.join(',')}) VALUES ${batch.join(',')} ON DUPLICATE KEY UPDATE ${updated.join(',')}`
+                const query = `REPLACE INTO ${table_prefix}${schema.name} (${fields.join(',')}) VALUES ${batch.join(',')}`
                 await this.query(query)
                 batch = []
             }

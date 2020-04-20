@@ -1,0 +1,33 @@
+{
+    "name": "apple",
+    "fields": {
+        "hash": {
+            "type": "string",
+            "maxLength": 32,
+            "primary_key": true
+        },
+        "geo_type": {
+            "type": "string",
+            "maxLength": 25
+        },
+        "region": {
+            "type": "string",
+            "maxLength": 50
+        },
+        "transportation_type": {
+            "type": "string",
+            "maxLength": 25
+        },
+        "date": {
+            "type": "timestamp",
+            "format": "YYYYMMDD"
+        },
+        "value": {
+            "type": "decimal"
+        },
+        "state_abbv": {
+            "type": "string",
+            "maxLength": 2
+        }
+    }
+}

@@ -12,10 +12,12 @@ The ETL source code and Grafana dashboards will be backed up and stored here. I 
 Below are the current data sources being populated.
 
 |                    | Website          | Function Name | Data         |
-| -----------------: | --------------------- | ------------------------- | ------------------------- |
+| -----------------: | --------------------- | ------------------------- | ------------------ |
 |        The Covid Tracking Project | [covidtracking.com](https://covidtracking.com/) | ingest_ctp | [CSV](https://covidtracking.com/api/v1/states/daily.csv) |
 | US Census Data / 2019 projections | [census.gov](https://www.census.gov/) | ingest_us | [API](https://api.census.gov/data/2019/pep/population?get=NAME,COUNTY,STATE,DENSITY,POP&for=county:*) |
 |        New York Times County Data | [nyt.com](https://www.nytimes.com/article/coronavirus-county-data-us.html) | ingest_nyt    | [CSV](https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-counties.csv) |
+|               Apple Mobility Data | [apple.com](https://www.apple.com/covid19/mobility)          | ingest_apl    | [CSV](https://www.apple.com/covid19/mobility)                |
+|  Eric Celeste / US County GeoJSON | [eric.clst.org](https://eric.clst.org/tech/usgeojson/)       | -             | [JSON](https://eric.clst.org/assets/wiki/uploads/Stuff/gz_2010_us_050_00_20m.json) |
 
 ## use & contribute
 

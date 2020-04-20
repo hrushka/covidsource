@@ -31,7 +31,7 @@ provider:
     USERNAME: ${self:custom.USERNAME}
     PASSWORD: ${self:custom.PASSWORD}
     #custom
-    BATCH_SIZE: 100
+    BATCH_SIZE: 250
 custom:
   # Pull in config file for custom vars per stage
   stage: ${opt:stage, self:provider.stage}
@@ -90,3 +90,8 @@ functions:
     timeout: 30
     events:
       - schedule: rate(3 hours)
+  ingest_apl:
+    handler: handler.ingest_apl
+    timeout: 30
+    events:
+      - schedule: rate(12 hours)
