@@ -1,8 +1,9 @@
 'use strict'
 
 const fetch = require('node-fetch')
-const crypto = require('crypto')
 const parse = require('csv-parse/lib/sync')
+const moment = require('moment')
+const crypto = require('crypto')
 const { Datastore } = require('../../../utils')
 
 // Import the pipeline config
@@ -15,13 +16,12 @@ const schema = require('./schema.json')
 const data_states = require('../../../static/us_states.json')
 
 /**
-  * ETL for The New York Times US county dataset
+  * ETL for Google Mobile Tracking Data
   * @author Matt Hrushka <c19@hru.sh>
 */
 module.exports.run = async _ => {
 
-  // Fetch the data from the "state" historical data endpoint
-  const response = await fetch(config.sources.nyt_counties.dataUrl)
+  const response = await fetch(config.sources.google.dataUrl)
   const input = await response.text()
 
   const records = parse(input, {
@@ -33,17 +33,11 @@ module.exports.run = async _ => {
   for (var r in records) {
 
     const rec = records[r]
-    const hash_id = `${rec.date}_${rec.county}_${rec.state}`
-
-    // County name fixes to make sure we match on the US Census County names
-    switch(records[r].county){
-      case "New York City":
-        records[r].county = "New York";
-      default:
-    }
+    const hash_id = `${rec.country_region_code}_${rec.sub_region_1}_${rec.sub_region_2}_${rec.date}`
 
     records[r].hash = crypto.createHash('md5').update(hash_id).digest("hex")
-    records[r].state_abbv = data_states[rec.state]
+    records[r].state_abbv = data_states[rec.sub_region_1] // Add in state abbreviation
+    records[r].sub_region_2 = records[r].sub_region_2.replace(' County','') // Strip the "County" label from counties
   }
 
   // Initialize Database if it hasn't been
@@ -51,5 +45,4 @@ module.exports.run = async _ => {
   await Datastore.insert(schema, records)
 
   return { success: true }
-
 }

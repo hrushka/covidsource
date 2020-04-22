@@ -17,7 +17,10 @@ Below are the current data sources being populated.
 | US Census Data / 2019 projections | [census.gov](https://www.census.gov/) | ingest_us | [API](https://api.census.gov/data/2019/pep/population?get=NAME,COUNTY,STATE,DENSITY,POP&for=county:*) |
 |        New York Times County Data | [nyt.com](https://www.nytimes.com/article/coronavirus-county-data-us.html) | ingest_nyt    | [CSV](https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-counties.csv) |
 |               Apple Mobility Data | [apple.com](https://www.apple.com/covid19/mobility)          | ingest_apl    | [CSV](https://www.apple.com/covid19/mobility)                |
+|              Google Mobility Data | [google.com](https://www.google.com/covid19/mobility)        | ingest_gog *  | [CSV](https://www.gstatic.com/covid19/mobility/Global_Mobility_Report.csv) |
 |  Eric Celeste / US County GeoJSON | [eric.clst.org](https://eric.clst.org/tech/usgeojson/)       | -             | [JSON](https://eric.clst.org/assets/wiki/uploads/Stuff/gz_2010_us_050_00_20m.json) |
+
+> \* the Google data source currently takes longer than the 30 second lambda timeout so can currently only be ingested manually. This can be done by setting the `AURORA_HOST` environment variable.
 
 ## use & contribute
 

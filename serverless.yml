@@ -95,3 +95,6 @@ functions:
     timeout: 30
     events:
       - schedule: rate(12 hours)
+  ingest_gog:
+    handler: handler.ingest_gog
+    timeout: 30

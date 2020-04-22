@@ -24,6 +24,12 @@
             "Description":"COVID⁠-⁠19 mobility trends in countries/regions and cities. Reports are published daily and reflect requests for directions in Apple Maps.",
             "metadataUrl":"https://covid19-static.cdn-apple.com/covid19-mobility-data/current/v1/index.json",
             "dataUrl":"https://covid19-static.cdn-apple.com"
+        },
+        "google":{
+            "name":"Google Mobility Reports",
+            "url":"https://www.google.com/covid19/mobility",
+            "Description":"COVID⁠-⁠19 mobility trends in countries/regions and cities. Reports are published weekly and reflect requests for directions in Google Places.",
+            "dataUrl":"https://www.gstatic.com/covid19/mobility/Global_Mobility_Report.csv"
         }
     }
 }

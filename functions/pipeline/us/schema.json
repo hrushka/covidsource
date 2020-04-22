@@ -1,5 +1,8 @@
 {
     "name": "us_data",
+    "indexes":[
+        ["state_abbv","usc_state_id","usc_county_id"]
+    ],
     "fields": {
         "hash": {
             "type": "string",

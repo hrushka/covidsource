@@ -51,6 +51,7 @@ class Datastore {
                     case "timestamp":
                         value = `"${moment.utc(value, attrs.format).format()}"`
                         break
+                    case "decimal":
                     case "int":
                         value = (value === "") ? "null" : +value
                         break
@@ -115,7 +116,15 @@ class Datastore {
             fields.push(`${elm} ${type}`)
         })
 
-        let query = `CREATE TABLE IF NOT EXISTS ${table_prefix}${schema.name} (${fields.join(',')});`
+        let indexes = []
+        if(schema.indexes !== undefined){
+            for(const index of schema.indexes){
+                indexes.push(`INDEX (${index.join(',')})`)
+            }
+        }
+        indexes = (indexes.length > 0) ? `,${indexes.join(',')}` : ''
+
+        let query = `CREATE TABLE IF NOT EXISTS ${table_prefix}${schema.name} (${fields.join(',')}${indexes});`
         console.log(query)
         await this.client.query(query)
         this.client.end()

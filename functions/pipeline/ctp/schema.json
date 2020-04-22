@@ -1,5 +1,8 @@
 {
     "name": "ctp",
+    "indexes":[
+        ["date","state"]
+    ],
     "fields": {
         "date": {
             "type": "timestamp",

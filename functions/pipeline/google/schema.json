@@ -1,0 +1,57 @@
+{
+    "name": "google",
+    "indexes":[
+        ["date","country_region_code","sub_region_1"],
+        ["date","country_region_code","sub_region_2"],
+        ["date","sub_region_2"]
+    ],
+    "fields": {
+        "hash": {
+            "type": "string",
+            "maxLength": 32,
+            "primary_key": true
+        },
+        "country_region_code": {
+            "type": "string",
+            "maxLength": 2
+        },
+        "country_region": {
+            "type": "string",
+            "maxLength": 50
+        },
+        "sub_region_1": {
+            "type": "string",
+            "maxLength": 50
+        },
+        "sub_region_2": {
+            "type": "string",
+            "maxLength": 50
+        },
+        "state_abbv": {
+            "type": "string",
+            "maxLength": 2
+        },
+        "date": {
+            "type": "timestamp",
+            "format": "YYYY-MM-DD"
+        },
+        "retail_and_recreation_percent_change_from_baseline": {
+            "type": "decimal"
+        },
+        "grocery_and_pharmacy_percent_change_from_baseline": {
+            "type": "decimal"
+        },
+        "parks_percent_change_from_baseline": {
+            "type": "decimal"
+        },
+        "transit_stations_percent_change_from_baseline": {
+            "type": "decimal"
+        },
+        "workplaces_percent_change_from_baseline": {
+            "type": "decimal"
+        },
+        "residential_percent_change_from_baseline": {
+            "type": "decimal"
+        }
+    }
+}

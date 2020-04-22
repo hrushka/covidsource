@@ -1,5 +1,8 @@
 {
     "name": "apple",
+    "indexes":[
+        ["date","geo_type","state_abbv"]
+    ],
     "fields": {
         "hash": {
             "type": "string",

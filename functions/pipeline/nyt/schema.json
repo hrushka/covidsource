@@ -1,5 +1,10 @@
 {
     "name": "nyt_county",
+    "indexes":[
+        ["date","state"],
+        ["date","state_abbv"],
+        ["date","state_abbv","county"]
+    ],
     "fields": {
         "hash": {
             "type": "string",
