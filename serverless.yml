@@ -79,22 +79,24 @@ functions:
   # Data ingestion pipeline functions
   ingest_ctp:
     handler: handler.ingest_ctp
-    timeout: 30
+    timeout: 60
     events:
       - schedule: rate(1 hour)
   ingest_us:
     handler: handler.ingest_us
-    timeout: 30
+    timeout: 60
   ingest_nyt:
     handler: handler.ingest_nyt
-    timeout: 30
+    timeout: 120
     events:
       - schedule: rate(3 hours)
   ingest_apl:
     handler: handler.ingest_apl
-    timeout: 30
+    timeout: 120
     events:
       - schedule: rate(12 hours)
   ingest_gog:
     handler: handler.ingest_gog
-    timeout: 30
+    timeout: 900
+    events:
+      - schedule: rate(12 hours)
