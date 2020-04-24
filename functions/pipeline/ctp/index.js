@@ -2,6 +2,7 @@
 
 const fetch = require('node-fetch')
 const parse = require('csv-parse/lib/sync')
+const crypto = require('crypto')
 const { Datastore } = require('../../../utils')
 
 // Import the pipeline config
@@ -24,6 +25,13 @@ module.exports.run = async _ => {
     columns: true,
     skip_empty_lines: true
   })
+
+  // Need to re-compute our own hashes as we've found multiple hashes per date/state pair
+  for (var r in records) {
+    const rec = records[r]
+    const hash_id = `${rec.date}_${rec.state}`
+    records[r].hash = crypto.createHash('md5').update(hash_id).digest("hex")
+  }
 
   // Initialize Database if it hasn't been
   await Datastore.init(schema)
