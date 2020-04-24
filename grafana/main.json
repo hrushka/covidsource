@@ -1,2478 +1,3012 @@
 {
-    "annotations": {
-      "list": [
-        {
-          "builtIn": 1,
-          "datasource": "-- Grafana --",
-          "enable": true,
-          "hide": true,
-          "iconColor": "rgba(0, 211, 255, 1)",
-          "name": "Annotations & Alerts",
-          "type": "dashboard"
-        }
-      ]
-    },
-    "editable": true,
-    "gnetId": null,
-    "graphTooltip": 0,
-    "id": 8,
-    "iteration": 1586707642002,
-    "links": [],
-    "panels": [
+  "annotations": {
+    "list": [
       {
-        "collapsed": false,
-        "datasource": null,
-        "gridPos": {
-          "h": 1,
-          "w": 24,
-          "x": 0,
-          "y": 0
-        },
-        "id": 26,
-        "panels": [],
-        "title": "Rate Data",
-        "type": "row"
-      },
-      {
-        "cacheTimeout": null,
-        "colorBackground": false,
-        "colorPrefix": false,
-        "colorValue": false,
-        "colors": [
-          "#299c46",
-          "rgba(237, 129, 40, 0.89)",
-          "#d44a3a"
-        ],
-        "datasource": "CovidSource Aurora",
-        "decimals": 3,
-        "format": "percentunit",
-        "gauge": {
-          "maxValue": 100,
-          "minValue": 0,
-          "show": false,
-          "thresholdLabels": false,
-          "thresholdMarkers": true
-        },
-        "gridPos": {
-          "h": 2,
-          "w": 8,
-          "x": 0,
-          "y": 1
-        },
-        "id": 28,
-        "interval": null,
-        "links": [],
-        "mappingType": 1,
-        "mappingTypes": [
-          {
-            "name": "value to text",
-            "value": 1
-          },
-          {
-            "name": "range to text",
-            "value": 2
-          }
-        ],
-        "maxDataPoints": 100,
-        "nullPointMode": "connected",
-        "nullText": null,
-        "postfix": "",
-        "postfixFontSize": "50%",
-        "prefix": "",
-        "prefixFontSize": "50%",
-        "rangeMaps": [
-          {
-            "from": "null",
-            "text": "N/A",
-            "to": "null"
-          }
-        ],
-        "sparkline": {
-          "fillColor": "rgba(31, 118, 189, 0.18)",
-          "full": false,
-          "lineColor": "rgb(31, 120, 193)",
-          "show": false,
-          "ymax": null,
-          "ymin": null
-        },
-        "tableColumn": "",
-        "targets": [
-          {
-            "format": "time_series",
-            "group": [],
-            "metricColumn": "none",
-            "rawQuery": true,
-            "rawSql": "SELECT\n  date AS \"time\",\n  CAST(SUM(positive) / $population as DECIMAL(10,8)) AS \"Prevalence\"\nFROM data_ctp\nWHERE\n  state IN($state)AND $__timeFilter(date)\nGROUP BY 1\nORDER BY $__timeGroup(date,$__interval)",
-            "refId": "A",
-            "select": [
-              [
-                {
-                  "params": [
-                    "positive"
-                  ],
-                  "type": "column"
-                },
-                {
-                  "params": [
-                    "positive"
-                  ],
-                  "type": "alias"
-                }
-              ]
-            ],
-            "table": "data_ctp",
-            "timeColumn": "date",
-            "timeColumnType": "timestamp",
-            "where": [
-              {
-                "datatype": "varchar",
-                "name": "",
-                "params": [
-                  "state",
-                  "=",
-                  "'$state'"
-                ],
-                "type": "expression"
-              }
-            ]
-          }
-        ],
-        "thresholds": "",
-        "timeFrom": null,
-        "timeShift": null,
-        "title": "Prevalence Rate",
-        "transparent": true,
-        "type": "singlestat",
-        "valueFontSize": "80%",
-        "valueMaps": [
-          {
-            "op": "=",
-            "text": "N/A",
-            "value": "null"
-          }
-        ],
-        "valueName": "current"
-      },
-      {
-        "cacheTimeout": null,
-        "colorBackground": false,
-        "colorValue": false,
-        "colors": [
-          "#299c46",
-          "rgba(237, 129, 40, 0.89)",
-          "#d44a3a"
-        ],
-        "datasource": "CovidSource Aurora",
-        "decimals": 3,
-        "format": "short",
-        "gauge": {
-          "maxValue": 100,
-          "minValue": 0,
-          "show": false,
-          "thresholdLabels": false,
-          "thresholdMarkers": true
-        },
-        "gridPos": {
-          "h": 2,
-          "w": 8,
-          "x": 8,
-          "y": 1
-        },
-        "id": 29,
-        "interval": null,
-        "links": [],
-        "mappingType": 1,
-        "mappingTypes": [
-          {
-            "name": "value to text",
-            "value": 1
-          },
-          {
-            "name": "range to text",
-            "value": 2
-          }
-        ],
-        "maxDataPoints": 100,
-        "nullPointMode": "connected",
-        "nullText": null,
-        "postfix": "",
-        "postfixFontSize": "50%",
-        "prefix": "",
-        "prefixFontSize": "50%",
-        "rangeMaps": [
-          {
-            "from": "null",
-            "text": "N/A",
-            "to": "null"
-          }
-        ],
-        "sparkline": {
-          "fillColor": "rgba(31, 118, 189, 0.18)",
-          "full": false,
-          "lineColor": "rgb(31, 120, 193)",
-          "show": false,
-          "ymax": null,
-          "ymin": null
-        },
-        "tableColumn": "",
-        "targets": [
-          {
-            "format": "time_series",
-            "group": [],
-            "metricColumn": "none",
-            "rawQuery": true,
-            "rawSql": "SELECT\n  date AS \"time\",\n  CAST((SUM(positiveIncrease) / $population) * 1000 as DECIMAL(10,8)) AS \"Incidence Rate\"\nFROM data_ctp\nWHERE\n  state IN($state) AND $__timeFilter(date)\nGROUP BY 1\nORDER BY $__timeGroup(date,$__interval)",
-            "refId": "A",
-            "select": [
-              [
-                {
-                  "params": [
-                    "positive"
-                  ],
-                  "type": "column"
-                }
-              ]
-            ],
-            "table": "data_ctp",
-            "timeColumn": "date",
-            "timeColumnType": "timestamp",
-            "where": [
-              {
-                "name": "$__timeFilter",
-                "params": [],
-                "type": "macro"
-              }
-            ]
-          }
-        ],
-        "thresholds": "",
-        "timeFrom": null,
-        "timeShift": null,
-        "title": "Incidence Rate",
-        "transparent": true,
-        "type": "singlestat",
-        "valueFontSize": "80%",
-        "valueMaps": [
-          {
-            "op": "=",
-            "text": "N/A",
-            "value": "null"
-          }
-        ],
-        "valueName": "current"
-      },
-      {
-        "cacheTimeout": null,
-        "colorBackground": false,
-        "colorValue": false,
-        "colors": [
-          "#299c46",
-          "rgba(237, 129, 40, 0.89)",
-          "#d44a3a"
-        ],
-        "datasource": "CovidSource Aurora",
-        "decimals": 3,
-        "format": "percentunit",
-        "gauge": {
-          "maxValue": 100,
-          "minValue": 0,
-          "show": false,
-          "thresholdLabels": false,
-          "thresholdMarkers": true
-        },
-        "gridPos": {
-          "h": 2,
-          "w": 8,
-          "x": 16,
-          "y": 1
-        },
-        "id": 30,
-        "interval": null,
-        "links": [],
-        "mappingType": 1,
-        "mappingTypes": [
-          {
-            "name": "value to text",
-            "value": 1
-          },
-          {
-            "name": "range to text",
-            "value": 2
-          }
-        ],
-        "maxDataPoints": 100,
-        "nullPointMode": "connected",
-        "nullText": null,
-        "postfix": "",
-        "postfixFontSize": "50%",
-        "prefix": "",
-        "prefixFontSize": "50%",
-        "rangeMaps": [
-          {
-            "from": "null",
-            "text": "N/A",
-            "to": "null"
-          }
-        ],
-        "sparkline": {
-          "fillColor": "rgba(31, 118, 189, 0.18)",
-          "full": false,
-          "lineColor": "rgb(31, 120, 193)",
-          "show": false,
-          "ymax": null,
-          "ymin": null
-        },
-        "tableColumn": "",
-        "targets": [
-          {
-            "format": "time_series",
-            "group": [],
-            "metricColumn": "none",
-            "rawQuery": true,
-            "rawSql": "SELECT\n  date AS \"time\",\n  CAST(SUM(death) / SUM(positive) as DECIMAL(10,8)) AS \"CFR\"\nFROM data_ctp\nWHERE\n  state IN($state) AND $__timeFilter(date)\nGROUP BY 1\nORDER BY $__timeGroup(date,$__interval)",
-            "refId": "A",
-            "select": [
-              [
-                {
-                  "params": [
-                    "positive"
-                  ],
-                  "type": "column"
-                }
-              ]
-            ],
-            "table": "data_ctp",
-            "timeColumn": "date",
-            "timeColumnType": "timestamp",
-            "where": [
-              {
-                "name": "$__timeFilter",
-                "params": [],
-                "type": "macro"
-              }
-            ]
-          }
-        ],
-        "thresholds": "",
-        "timeFrom": null,
-        "timeShift": null,
-        "title": "Case Fatality Rate (CFR)",
-        "transparent": true,
-        "type": "singlestat",
-        "valueFontSize": "80%",
-        "valueMaps": [
-          {
-            "op": "=",
-            "text": "N/A",
-            "value": "null"
-          }
-        ],
-        "valueName": "current"
-      },
-      {
-        "aliasColors": {},
-        "bars": false,
-        "dashLength": 10,
-        "dashes": false,
-        "datasource": "CovidSource Aurora",
-        "fill": 1,
-        "fillGradient": 0,
-        "gridPos": {
-          "h": 5,
-          "w": 8,
-          "x": 0,
-          "y": 3
-        },
-        "hiddenSeries": false,
-        "id": 20,
-        "legend": {
-          "avg": false,
-          "current": false,
-          "max": false,
-          "min": false,
-          "show": false,
-          "total": false,
-          "values": false
-        },
-        "lines": true,
-        "linewidth": 1,
-        "nullPointMode": "null",
-        "options": {
-          "dataLinks": []
-        },
-        "percentage": false,
-        "pointradius": 2,
-        "points": false,
-        "renderer": "flot",
-        "seriesOverrides": [
-          {
-            "alias": "Prevalence",
-            "color": "#FF9830"
-          }
-        ],
-        "spaceLength": 10,
-        "stack": false,
-        "steppedLine": false,
-        "targets": [
-          {
-            "format": "time_series",
-            "group": [],
-            "metricColumn": "none",
-            "rawQuery": true,
-            "rawSql": "SELECT\n  date AS \"time\",\n  CAST(SUM(positive) / $population as DECIMAL(10,8)) AS \"Prevalence\"\nFROM data_ctp\nWHERE\n  state IN($state)AND $__timeFilter(date)\nGROUP BY 1\nORDER BY $__timeGroup(date,$__interval)",
-            "refId": "A",
-            "select": [
-              [
-                {
-                  "params": [
-                    "positive"
-                  ],
-                  "type": "column"
-                }
-              ]
-            ],
-            "table": "data_ctp",
-            "timeColumn": "date",
-            "timeColumnType": "timestamp",
-            "where": [
-              {
-                "name": "$__timeFilter",
-                "params": [],
-                "type": "macro"
-              }
-            ]
-          }
-        ],
-        "thresholds": [],
-        "timeFrom": null,
-        "timeRegions": [],
-        "timeShift": null,
-        "title": "Prevalence Rate Over Time",
-        "tooltip": {
-          "shared": false,
-          "sort": 0,
-          "value_type": "individual"
-        },
-        "transparent": true,
-        "type": "graph",
-        "xaxis": {
-          "buckets": null,
-          "mode": "time",
-          "name": null,
-          "show": true,
-          "values": []
-        },
-        "yaxes": [
-          {
-            "decimals": 4,
-            "format": "percentunit",
-            "label": null,
-            "logBase": 1,
-            "max": null,
-            "min": null,
-            "show": true
-          },
-          {
-            "format": "short",
-            "label": null,
-            "logBase": 1,
-            "max": null,
-            "min": null,
-            "show": true
-          }
-        ],
-        "yaxis": {
-          "align": false,
-          "alignLevel": null
-        }
-      },
-      {
-        "aliasColors": {},
-        "bars": false,
-        "dashLength": 10,
-        "dashes": false,
-        "datasource": "CovidSource Aurora",
-        "fill": 1,
-        "fillGradient": 0,
-        "gridPos": {
-          "h": 5,
-          "w": 8,
-          "x": 8,
-          "y": 3
-        },
-        "hiddenSeries": false,
-        "id": 21,
-        "legend": {
-          "avg": false,
-          "current": false,
-          "max": false,
-          "min": false,
-          "show": false,
-          "total": false,
-          "values": false
-        },
-        "lines": true,
-        "linewidth": 1,
-        "nullPointMode": "null",
-        "options": {
-          "dataLinks": []
-        },
-        "percentage": false,
-        "pointradius": 2,
-        "points": false,
-        "renderer": "flot",
-        "seriesOverrides": [
-          {
-            "alias": "Incidence Rate",
-            "color": "#B877D9"
-          }
-        ],
-        "spaceLength": 10,
-        "stack": false,
-        "steppedLine": false,
-        "targets": [
-          {
-            "format": "time_series",
-            "group": [],
-            "metricColumn": "none",
-            "rawQuery": true,
-            "rawSql": "SELECT\n  date AS \"time\",\n  CAST((SUM(positiveIncrease) / $population) * 1000 as DECIMAL(10,8)) AS \"Incidence Rate\"\nFROM data_ctp\nWHERE\n  state IN($state) AND $__timeFilter(date)\nGROUP BY 1\nORDER BY $__timeGroup(date,$__interval)",
-            "refId": "A",
-            "select": [
-              [
-                {
-                  "params": [
-                    "positive"
-                  ],
-                  "type": "column"
-                }
-              ]
-            ],
-            "table": "data_ctp",
-            "timeColumn": "date",
-            "timeColumnType": "timestamp",
-            "where": [
-              {
-                "name": "$__timeFilter",
-                "params": [],
-                "type": "macro"
-              }
-            ]
-          }
-        ],
-        "thresholds": [],
-        "timeFrom": null,
-        "timeRegions": [],
-        "timeShift": null,
-        "title": "Incidence Rate Over Time",
-        "tooltip": {
-          "shared": false,
-          "sort": 0,
-          "value_type": "individual"
-        },
-        "transparent": true,
-        "type": "graph",
-        "xaxis": {
-          "buckets": null,
-          "mode": "time",
-          "name": null,
-          "show": true,
-          "values": []
-        },
-        "yaxes": [
-          {
-            "format": "short",
-            "label": null,
-            "logBase": 1,
-            "max": null,
-            "min": null,
-            "show": true
-          },
-          {
-            "format": "short",
-            "label": null,
-            "logBase": 1,
-            "max": null,
-            "min": null,
-            "show": true
-          }
-        ],
-        "yaxis": {
-          "align": false,
-          "alignLevel": null
-        }
-      },
-      {
-        "aliasColors": {},
-        "bars": false,
-        "dashLength": 10,
-        "dashes": false,
-        "datasource": "CovidSource Aurora",
-        "fill": 1,
-        "fillGradient": 0,
-        "gridPos": {
-          "h": 5,
-          "w": 8,
-          "x": 16,
-          "y": 3
-        },
-        "hiddenSeries": false,
-        "id": 22,
-        "legend": {
-          "avg": false,
-          "current": false,
-          "max": false,
-          "min": false,
-          "show": false,
-          "total": false,
-          "values": false
-        },
-        "lines": true,
-        "linewidth": 1,
-        "nullPointMode": "null",
-        "options": {
-          "dataLinks": []
-        },
-        "percentage": false,
-        "pointradius": 2,
-        "points": false,
-        "renderer": "flot",
-        "seriesOverrides": [
-          {
-            "alias": "CFR",
-            "color": "#5794F2"
-          }
-        ],
-        "spaceLength": 10,
-        "stack": false,
-        "steppedLine": false,
-        "targets": [
-          {
-            "format": "time_series",
-            "group": [],
-            "metricColumn": "none",
-            "rawQuery": true,
-            "rawSql": "SELECT\n  date AS \"time\",\n  CAST(SUM(death) / SUM(positive) as DECIMAL(10,8)) AS \"CFR\"\nFROM data_ctp\nWHERE\n  state IN($state) AND $__timeFilter(date)\nGROUP BY 1\nORDER BY $__timeGroup(date,$__interval)",
-            "refId": "A",
-            "select": [
-              [
-                {
-                  "params": [
-                    "positive"
-                  ],
-                  "type": "column"
-                }
-              ]
-            ],
-            "table": "data_ctp",
-            "timeColumn": "date",
-            "timeColumnType": "timestamp",
-            "where": [
-              {
-                "name": "$__timeFilter",
-                "params": [],
-                "type": "macro"
-              }
-            ]
-          }
-        ],
-        "thresholds": [],
-        "timeFrom": null,
-        "timeRegions": [],
-        "timeShift": null,
-        "title": "CFR Over Time",
-        "tooltip": {
-          "shared": false,
-          "sort": 0,
-          "value_type": "individual"
-        },
-        "transparent": true,
-        "type": "graph",
-        "xaxis": {
-          "buckets": null,
-          "mode": "time",
-          "name": null,
-          "show": true,
-          "values": []
-        },
-        "yaxes": [
-          {
-            "format": "percentunit",
-            "label": null,
-            "logBase": 1,
-            "max": null,
-            "min": null,
-            "show": true
-          },
-          {
-            "format": "short",
-            "label": null,
-            "logBase": 1,
-            "max": null,
-            "min": null,
-            "show": true
-          }
-        ],
-        "yaxis": {
-          "align": false,
-          "alignLevel": null
-        }
-      },
-      {
-        "collapsed": false,
-        "datasource": null,
-        "gridPos": {
-          "h": 1,
-          "w": 24,
-          "x": 0,
-          "y": 8
-        },
-        "id": 24,
-        "panels": [],
-        "title": "Testing & Mortality",
-        "type": "row"
-      },
-      {
-        "cacheTimeout": null,
-        "colorBackground": false,
-        "colorValue": false,
-        "colors": [
-          "#299c46",
-          "rgba(237, 129, 40, 0.89)",
-          "#d44a3a"
-        ],
-        "datasource": "CovidSource Aurora",
-        "decimals": null,
-        "format": "short",
-        "gauge": {
-          "maxValue": 100,
-          "minValue": 0,
-          "show": false,
-          "thresholdLabels": false,
-          "thresholdMarkers": true
-        },
-        "gridPos": {
-          "h": 3,
-          "w": 6,
-          "x": 0,
-          "y": 9
-        },
-        "id": 9,
-        "interval": null,
-        "links": [],
-        "mappingType": 1,
-        "mappingTypes": [
-          {
-            "name": "value to text",
-            "value": 1
-          },
-          {
-            "name": "range to text",
-            "value": 2
-          }
-        ],
-        "maxDataPoints": 100,
-        "nullPointMode": "connected",
-        "nullText": null,
-        "postfix": "",
-        "postfixFontSize": "50%",
-        "prefix": "",
-        "prefixFontSize": "50%",
-        "rangeMaps": [
-          {
-            "from": "null",
-            "text": "N/A",
-            "to": "null"
-          }
-        ],
-        "sparkline": {
-          "fillColor": "#FFB357",
-          "full": false,
-          "lineColor": "#FF9830",
-          "show": true,
-          "ymax": null,
-          "ymin": null
-        },
-        "tableColumn": "",
-        "targets": [
-          {
-            "format": "time_series",
-            "group": [
-              {
-                "params": [
-                  "$__interval",
-                  "none"
-                ],
-                "type": "time"
-              }
-            ],
-            "metricColumn": "none",
-            "rawQuery": false,
-            "rawSql": "SELECT\n  $__timeGroupAlias(date,$__interval),\n  sum(positive) AS \"positive\"\nFROM data_ctp\nWHERE\n  $__timeFilter(date) AND\n  state IN ($state)\nGROUP BY 1\nORDER BY $__timeGroup(date,$__interval)",
-            "refId": "A",
-            "select": [
-              [
-                {
-                  "params": [
-                    "positive"
-                  ],
-                  "type": "column"
-                },
-                {
-                  "params": [
-                    "sum"
-                  ],
-                  "type": "aggregate"
-                },
-                {
-                  "params": [
-                    "positive"
-                  ],
-                  "type": "alias"
-                }
-              ]
-            ],
-            "table": "data_ctp",
-            "timeColumn": "date",
-            "timeColumnType": "timestamp",
-            "where": [
-              {
-                "name": "$__timeFilter",
-                "params": [],
-                "type": "macro"
-              },
-              {
-                "datatype": "varchar",
-                "name": "",
-                "params": [
-                  "state",
-                  "IN",
-                  "($state)"
-                ],
-                "type": "expression"
-              }
-            ]
-          }
-        ],
-        "thresholds": "",
-        "timeFrom": null,
-        "timeShift": null,
-        "title": "Positive Cases",
-        "transparent": true,
-        "type": "singlestat",
-        "valueFontSize": "80%",
-        "valueMaps": [
-          {
-            "op": "=",
-            "text": "N/A",
-            "value": "null"
-          }
-        ],
-        "valueName": "current"
-      },
-      {
-        "cacheTimeout": null,
-        "colorBackground": false,
-        "colorValue": false,
-        "colors": [
-          "#299c46",
-          "rgba(237, 129, 40, 0.89)",
-          "#d44a3a"
-        ],
-        "datasource": "CovidSource Aurora",
-        "format": "short",
-        "gauge": {
-          "maxValue": 100,
-          "minValue": 0,
-          "show": false,
-          "thresholdLabels": false,
-          "thresholdMarkers": true
-        },
-        "gridPos": {
-          "h": 3,
-          "w": 6,
-          "x": 6,
-          "y": 9
-        },
-        "id": 8,
-        "interval": null,
-        "links": [],
-        "mappingType": 1,
-        "mappingTypes": [
-          {
-            "name": "value to text",
-            "value": 1
-          },
-          {
-            "name": "range to text",
-            "value": 2
-          }
-        ],
-        "maxDataPoints": 100,
-        "nullPointMode": "connected",
-        "nullText": null,
-        "postfix": "",
-        "postfixFontSize": "50%",
-        "prefix": "",
-        "prefixFontSize": "50%",
-        "rangeMaps": [
-          {
-            "from": "null",
-            "text": "N/A",
-            "to": "null"
-          }
-        ],
-        "sparkline": {
-          "fillColor": "#8AB8FF",
-          "full": false,
-          "lineColor": "#5794F2",
-          "show": true,
-          "ymax": null,
-          "ymin": null
-        },
-        "tableColumn": "",
-        "targets": [
-          {
-            "format": "time_series",
-            "group": [
-              {
-                "params": [
-                  "$__interval",
-                  "none"
-                ],
-                "type": "time"
-              }
-            ],
-            "metricColumn": "none",
-            "rawQuery": false,
-            "rawSql": "SELECT\n  $__timeGroupAlias(date,$__interval),\n  sum(totalTestResults) AS \"totalTestResults\"\nFROM data_ctp\nWHERE\n  $__timeFilter(date) AND\n  state IN ($state)\nGROUP BY 1\nORDER BY $__timeGroup(date,$__interval)",
-            "refId": "A",
-            "select": [
-              [
-                {
-                  "params": [
-                    "totalTestResults"
-                  ],
-                  "type": "column"
-                },
-                {
-                  "params": [
-                    "sum"
-                  ],
-                  "type": "aggregate"
-                },
-                {
-                  "params": [
-                    "totalTestResults"
-                  ],
-                  "type": "alias"
-                }
-              ]
-            ],
-            "table": "data_ctp",
-            "timeColumn": "date",
-            "timeColumnType": "timestamp",
-            "where": [
-              {
-                "name": "$__timeFilter",
-                "params": [],
-                "type": "macro"
-              },
-              {
-                "datatype": "varchar",
-                "name": "",
-                "params": [
-                  "state",
-                  "IN",
-                  "($state)"
-                ],
-                "type": "expression"
-              }
-            ]
-          }
-        ],
-        "thresholds": "",
-        "timeFrom": null,
-        "timeShift": null,
-        "title": "Total Tests",
-        "transparent": true,
-        "type": "singlestat",
-        "valueFontSize": "80%",
-        "valueMaps": [
-          {
-            "op": "=",
-            "text": "N/A",
-            "value": "null"
-          }
-        ],
-        "valueName": "current"
-      },
-      {
-        "columns": [],
-        "datasource": "CovidSource Aurora",
-        "description": "This data is compiled by The New York Times. County-level totals may differ from other data sets present on the dashboard.",
-        "fontSize": "100%",
-        "gridPos": {
-          "h": 6,
-          "w": 12,
-          "x": 12,
-          "y": 9
-        },
-        "id": 34,
-        "pageSize": null,
-        "showHeader": true,
-        "sort": {
-          "col": 2,
-          "desc": true
-        },
-        "styles": [
-          {
-            "alias": "",
-            "align": "left",
-            "colorMode": null,
-            "colors": [
-              "rgba(245, 54, 54, 0.9)",
-              "rgba(237, 129, 40, 0.89)",
-              "rgba(50, 172, 45, 0.97)"
-            ],
-            "decimals": 0,
-            "pattern": "Cases",
-            "thresholds": [],
-            "type": "number",
-            "unit": "locale"
-          },
-          {
-            "alias": "",
-            "align": "auto",
-            "colorMode": null,
-            "colors": [
-              "rgba(245, 54, 54, 0.9)",
-              "rgba(237, 129, 40, 0.89)",
-              "rgba(50, 172, 45, 0.97)"
-            ],
-            "dateFormat": "YYYY-MM-DD HH:mm:ss",
-            "decimals": 0,
-            "mappingType": 1,
-            "pattern": "Deaths",
-            "thresholds": [],
-            "type": "number",
-            "unit": "locale"
-          }
-        ],
-        "targets": [
-          {
-            "format": "table",
-            "group": [],
-            "metricColumn": "none",
-            "rawQuery": true,
-            "rawSql": "SELECT state_abbv as State, county as County, cases as Cases, ROUND((cases / $total_cases) * 100,2) as 'Case %', deaths as Deaths, ROUND((deaths / $total_deaths) * 100,2) as 'Deaths %' from data_nyt_county WHERE state_abbv IN ($state) AND date = (SELECT MAX( date ) FROM data_nyt_county WHERE state_abbv IN ($state)) ORDER BY cases DESC;",
-            "refId": "A",
-            "select": [
-              [
-                {
-                  "params": [
-                    "value"
-                  ],
-                  "type": "column"
-                }
-              ]
-            ],
-            "timeColumn": "time",
-            "where": [
-              {
-                "name": "$__timeFilter",
-                "params": [],
-                "type": "macro"
-              }
-            ]
-          }
-        ],
-        "timeFrom": null,
-        "timeShift": null,
-        "title": "County-level Impact",
-        "transform": "table",
-        "transparent": true,
-        "type": "table"
-      },
-      {
-        "cacheTimeout": null,
-        "colorBackground": false,
-        "colorValue": false,
-        "colors": [
-          "#299c46",
-          "rgba(237, 129, 40, 0.89)",
-          "#d44a3a"
-        ],
-        "datasource": "CovidSource Aurora",
-        "format": "short",
-        "gauge": {
-          "maxValue": 100,
-          "minValue": 0,
-          "show": false,
-          "thresholdLabels": false,
-          "thresholdMarkers": true
-        },
-        "gridPos": {
-          "h": 3,
-          "w": 6,
-          "x": 0,
-          "y": 12
-        },
-        "id": 10,
-        "interval": null,
-        "links": [],
-        "mappingType": 1,
-        "mappingTypes": [
-          {
-            "name": "value to text",
-            "value": 1
-          },
-          {
-            "name": "range to text",
-            "value": 2
-          }
-        ],
-        "maxDataPoints": 100,
-        "nullPointMode": "connected",
-        "nullText": null,
-        "postfix": "",
-        "postfixFontSize": "50%",
-        "prefix": "",
-        "prefixFontSize": "50%",
-        "rangeMaps": [
-          {
-            "from": "null",
-            "text": "N/A",
-            "to": "null"
-          }
-        ],
-        "sparkline": {
-          "fillColor": "#FF7383",
-          "full": false,
-          "lineColor": "#F2495C",
-          "show": true,
-          "ymax": null,
-          "ymin": null
-        },
-        "tableColumn": "",
-        "targets": [
-          {
-            "format": "time_series",
-            "group": [
-              {
-                "params": [
-                  "$__interval",
-                  "none"
-                ],
-                "type": "time"
-              }
-            ],
-            "metricColumn": "none",
-            "rawQuery": false,
-            "rawSql": "SELECT\n  $__timeGroupAlias(date,$__interval),\n  sum(death) AS \"death\"\nFROM data_ctp\nWHERE\n  state IN ($state)\nGROUP BY 1\nORDER BY $__timeGroup(date,$__interval)",
-            "refId": "A",
-            "select": [
-              [
-                {
-                  "params": [
-                    "death"
-                  ],
-                  "type": "column"
-                },
-                {
-                  "params": [
-                    "sum"
-                  ],
-                  "type": "aggregate"
-                },
-                {
-                  "params": [
-                    "death"
-                  ],
-                  "type": "alias"
-                }
-              ]
-            ],
-            "table": "data_ctp",
-            "timeColumn": "date",
-            "timeColumnType": "timestamp",
-            "where": [
-              {
-                "datatype": "varchar",
-                "name": "",
-                "params": [
-                  "state",
-                  "IN",
-                  "($state)"
-                ],
-                "type": "expression"
-              }
-            ]
-          }
-        ],
-        "thresholds": "",
-        "timeFrom": null,
-        "timeShift": null,
-        "title": "Total Deaths",
-        "transparent": true,
-        "type": "singlestat",
-        "valueFontSize": "80%",
-        "valueMaps": [
-          {
-            "op": "=",
-            "text": "N/A",
-            "value": "null"
-          }
-        ],
-        "valueName": "current"
-      },
-      {
-        "cacheTimeout": null,
-        "colorBackground": false,
-        "colorValue": false,
-        "colors": [
-          "#299c46",
-          "rgba(237, 129, 40, 0.89)",
-          "#d44a3a"
-        ],
-        "datasource": "CovidSource Aurora",
-        "format": "short",
-        "gauge": {
-          "maxValue": 100,
-          "minValue": 0,
-          "show": false,
-          "thresholdLabels": false,
-          "thresholdMarkers": true
-        },
-        "gridPos": {
-          "h": 3,
-          "w": 6,
-          "x": 6,
-          "y": 12
-        },
-        "id": 7,
-        "interval": null,
-        "links": [],
-        "mappingType": 1,
-        "mappingTypes": [
-          {
-            "name": "value to text",
-            "value": 1
-          },
-          {
-            "name": "range to text",
-            "value": 2
-          }
-        ],
-        "maxDataPoints": 100,
-        "nullPointMode": "connected",
-        "nullText": null,
-        "postfix": "",
-        "postfixFontSize": "50%",
-        "prefix": "",
-        "prefixFontSize": "50%",
-        "rangeMaps": [
-          {
-            "from": "null",
-            "text": "N/A",
-            "to": "null"
-          }
-        ],
-        "sparkline": {
-          "fillColor": "rgb(237, 237, 237)",
-          "full": false,
-          "lineColor": "rgb(122, 122, 122)",
-          "show": true,
-          "ymax": null,
-          "ymin": null
-        },
-        "tableColumn": "",
-        "targets": [
-          {
-            "format": "time_series",
-            "group": [],
-            "metricColumn": "none",
-            "rawQuery": true,
-            "rawSql": "SELECT\n  $__timeGroupAlias(date,$__interval),\n  (SUM(totalTestResults) / ($population/1000)) AS \"totalTestResults\"\nFROM data_ctp\nWHERE\n  $__timeFilter(date) AND\n  state IN ($state)\nGROUP BY 1\nORDER BY $__timeGroup(date,$__interval)",
-            "refId": "A",
-            "select": [
-              [
-                {
-                  "params": [
-                    "positive"
-                  ],
-                  "type": "column"
-                }
-              ]
-            ],
-            "table": "data_ctp",
-            "timeColumn": "date",
-            "timeColumnType": "timestamp",
-            "where": [
-              {
-                "name": "$__timeFilter",
-                "params": [],
-                "type": "macro"
-              }
-            ]
-          }
-        ],
-        "thresholds": "",
-        "timeFrom": null,
-        "timeShift": null,
-        "title": "Tests per Thousand",
-        "transparent": true,
-        "type": "singlestat",
-        "valueFontSize": "80%",
-        "valueMaps": [
-          {
-            "op": "=",
-            "text": "N/A",
-            "value": "null"
-          }
-        ],
-        "valueName": "current"
-      },
-      {
-        "aliasColors": {},
-        "bars": false,
-        "dashLength": 10,
-        "dashes": false,
-        "datasource": "CovidSource Aurora",
-        "description": "",
-        "fill": 1,
-        "fillGradient": 0,
-        "gridPos": {
-          "h": 7,
-          "w": 12,
-          "x": 0,
-          "y": 15
-        },
-        "hiddenSeries": false,
-        "hideTimeOverride": true,
-        "id": 2,
-        "legend": {
-          "alignAsTable": false,
-          "avg": false,
-          "current": false,
-          "hideEmpty": false,
-          "hideZero": false,
-          "max": false,
-          "min": false,
-          "rightSide": false,
-          "show": true,
-          "total": false,
-          "values": false
-        },
-        "lines": true,
-        "linewidth": 1,
-        "nullPointMode": "null",
-        "options": {
-          "dataLinks": [
-            {
-              "targetBlank": true,
-              "title": "Data by The COVID Tracking Project",
-              "url": "https://covidtracking.com/"
-            }
-          ]
-        },
-        "percentage": false,
-        "pointradius": 2,
-        "points": false,
-        "renderer": "flot",
-        "seriesOverrides": [
-          {
-            "alias": "Total",
-            "color": "#5794F2"
-          },
-          {
-            "alias": "Positive",
-            "color": "#FF9830"
-          },
-          {
-            "alias": "Negative",
-            "color": "#73BF69"
-          },
-          {
-            "alias": "Pending",
-            "color": "#B877D9"
-          }
-        ],
-        "spaceLength": 10,
-        "stack": false,
-        "steppedLine": false,
-        "targets": [
-          {
-            "format": "time_series",
-            "group": [
-              {
-                "params": [
-                  "$__interval",
-                  "none"
-                ],
-                "type": "time"
-              }
-            ],
-            "metricColumn": "none",
-            "rawQuery": false,
-            "rawSql": "SELECT\n  $__timeGroupAlias(date,$__interval),\n  sum(totalTestResults) AS \"Total\"\nFROM data_ctp\nWHERE\n  $__timeFilter(date) AND\n  state IN ($state)\nGROUP BY 1\nORDER BY $__timeGroup(date,$__interval)",
-            "refId": "D",
-            "select": [
-              [
-                {
-                  "params": [
-                    "totalTestResults"
-                  ],
-                  "type": "column"
-                },
-                {
-                  "params": [
-                    "sum"
-                  ],
-                  "type": "aggregate"
-                },
-                {
-                  "params": [
-                    "Total"
-                  ],
-                  "type": "alias"
-                }
-              ]
-            ],
-            "table": "data_ctp",
-            "timeColumn": "date",
-            "timeColumnType": "timestamp",
-            "where": [
-              {
-                "name": "$__timeFilter",
-                "params": [],
-                "type": "macro"
-              },
-              {
-                "datatype": "varchar",
-                "name": "",
-                "params": [
-                  "state",
-                  "IN",
-                  "($state)"
-                ],
-                "type": "expression"
-              }
-            ]
-          },
-          {
-            "format": "time_series",
-            "group": [
-              {
-                "params": [
-                  "$__interval",
-                  "none"
-                ],
-                "type": "time"
-              }
-            ],
-            "metricColumn": "none",
-            "rawQuery": false,
-            "rawSql": "SELECT\n  $__timeGroupAlias(date,$__interval),\n  sum(positive) AS \"Positive\"\nFROM data_ctp\nWHERE\n  $__timeFilter(date) AND\n  state IN ($state)\nGROUP BY 1\nORDER BY $__timeGroup(date,$__interval)",
-            "refId": "A",
-            "select": [
-              [
-                {
-                  "params": [
-                    "positive"
-                  ],
-                  "type": "column"
-                },
-                {
-                  "params": [
-                    "sum"
-                  ],
-                  "type": "aggregate"
-                },
-                {
-                  "params": [
-                    "Positive"
-                  ],
-                  "type": "alias"
-                }
-              ]
-            ],
-            "table": "data_ctp",
-            "timeColumn": "date",
-            "timeColumnType": "timestamp",
-            "where": [
-              {
-                "name": "$__timeFilter",
-                "params": [],
-                "type": "macro"
-              },
-              {
-                "datatype": "varchar",
-                "name": "",
-                "params": [
-                  "state",
-                  "IN",
-                  "($state)"
-                ],
-                "type": "expression"
-              }
-            ]
-          },
-          {
-            "format": "time_series",
-            "group": [
-              {
-                "params": [
-                  "$__interval",
-                  "none"
-                ],
-                "type": "time"
-              }
-            ],
-            "metricColumn": "none",
-            "rawQuery": false,
-            "rawSql": "SELECT\n  $__timeGroupAlias(date,$__interval),\n  sum(negative) AS \"Negative\"\nFROM data_ctp\nWHERE\n  $__timeFilter(date) AND\n  state IN ($state)\nGROUP BY 1\nORDER BY $__timeGroup(date,$__interval)",
-            "refId": "B",
-            "select": [
-              [
-                {
-                  "params": [
-                    "negative"
-                  ],
-                  "type": "column"
-                },
-                {
-                  "params": [
-                    "sum"
-                  ],
-                  "type": "aggregate"
-                },
-                {
-                  "params": [
-                    "Negative"
-                  ],
-                  "type": "alias"
-                }
-              ]
-            ],
-            "table": "data_ctp",
-            "timeColumn": "date",
-            "timeColumnType": "timestamp",
-            "where": [
-              {
-                "name": "$__timeFilter",
-                "params": [],
-                "type": "macro"
-              },
-              {
-                "datatype": "varchar",
-                "name": "",
-                "params": [
-                  "state",
-                  "IN",
-                  "($state)"
-                ],
-                "type": "expression"
-              }
-            ]
-          },
-          {
-            "format": "time_series",
-            "group": [
-              {
-                "params": [
-                  "$__interval",
-                  "none"
-                ],
-                "type": "time"
-              }
-            ],
-            "metricColumn": "none",
-            "rawQuery": false,
-            "rawSql": "SELECT\n  $__timeGroupAlias(date,$__interval),\n  sum(pending) AS \"Pending\"\nFROM data_ctp\nWHERE\n  $__timeFilter(date) AND\n  state IN ($state)\nGROUP BY 1\nORDER BY $__timeGroup(date,$__interval)",
-            "refId": "C",
-            "select": [
-              [
-                {
-                  "params": [
-                    "pending"
-                  ],
-                  "type": "column"
-                },
-                {
-                  "params": [
-                    "sum"
-                  ],
-                  "type": "aggregate"
-                },
-                {
-                  "params": [
-                    "Pending"
-                  ],
-                  "type": "alias"
-                }
-              ]
-            ],
-            "table": "data_ctp",
-            "timeColumn": "date",
-            "timeColumnType": "timestamp",
-            "where": [
-              {
-                "name": "$__timeFilter",
-                "params": [],
-                "type": "macro"
-              },
-              {
-                "datatype": "varchar",
-                "name": "",
-                "params": [
-                  "state",
-                  "IN",
-                  "($state)"
-                ],
-                "type": "expression"
-              }
-            ]
-          }
-        ],
-        "thresholds": [],
-        "timeFrom": null,
-        "timeRegions": [],
-        "timeShift": null,
-        "title": "Testing Data",
-        "tooltip": {
-          "shared": true,
-          "sort": 0,
-          "value_type": "individual"
-        },
-        "transparent": true,
-        "type": "graph",
-        "xaxis": {
-          "buckets": null,
-          "mode": "time",
-          "name": null,
-          "show": true,
-          "values": []
-        },
-        "yaxes": [
-          {
-            "format": "short",
-            "label": null,
-            "logBase": 1,
-            "max": null,
-            "min": null,
-            "show": true
-          },
-          {
-            "format": "short",
-            "label": null,
-            "logBase": 1,
-            "max": null,
-            "min": null,
-            "show": true
-          }
-        ],
-        "yaxis": {
-          "align": false,
-          "alignLevel": null
-        }
-      },
-      {
-        "aliasColors": {},
-        "bars": false,
-        "dashLength": 10,
-        "dashes": false,
-        "datasource": "CovidSource Aurora / Dev",
-        "description": "",
-        "fill": 1,
-        "fillGradient": 0,
-        "gridPos": {
-          "h": 7,
-          "w": 12,
-          "x": 12,
-          "y": 15
-        },
-        "hiddenSeries": false,
-        "hideTimeOverride": true,
-        "id": 3,
-        "legend": {
-          "alignAsTable": false,
-          "avg": false,
-          "current": false,
-          "hideEmpty": false,
-          "hideZero": false,
-          "max": false,
-          "min": false,
-          "rightSide": false,
-          "show": true,
-          "total": false,
-          "values": false
-        },
-        "lines": true,
-        "linewidth": 1,
-        "nullPointMode": "null",
-        "options": {
-          "dataLinks": [
-            {
-              "targetBlank": true,
-              "title": "Data by The COVID Tracking Project",
-              "url": "https://covidtracking.com/"
-            }
-          ]
-        },
-        "percentage": false,
-        "pointradius": 2,
-        "points": false,
-        "renderer": "flot",
-        "seriesOverrides": [
-          {
-            "alias": "Deaths",
-            "color": "#F2495C"
-          },
-          {
-            "alias": "Hospitalized",
-            "color": "#B877D9"
-          }
-        ],
-        "spaceLength": 10,
-        "stack": false,
-        "steppedLine": false,
-        "targets": [
-          {
-            "format": "time_series",
-            "group": [
-              {
-                "params": [
-                  "$__interval",
-                  "none"
-                ],
-                "type": "time"
-              }
-            ],
-            "metricColumn": "none",
-            "rawQuery": false,
-            "rawSql": "SELECT\n  $__timeGroupAlias(date,$__interval),\n  sum(hospitalizedCumulative) AS \"Hospitalized\"\nFROM data_ctp\nWHERE\n  $__timeFilter(date) AND\n  state IN ($state)\nGROUP BY 1\nORDER BY $__timeGroup(date,$__interval)",
-            "refId": "A",
-            "select": [
-              [
-                {
-                  "params": [
-                    "hospitalizedCumulative"
-                  ],
-                  "type": "column"
-                },
-                {
-                  "params": [
-                    "sum"
-                  ],
-                  "type": "aggregate"
-                },
-                {
-                  "params": [
-                    "Hospitalized"
-                  ],
-                  "type": "alias"
-                }
-              ]
-            ],
-            "table": "data_ctp",
-            "timeColumn": "date",
-            "timeColumnType": "timestamp",
-            "where": [
-              {
-                "name": "$__timeFilter",
-                "params": [],
-                "type": "macro"
-              },
-              {
-                "datatype": "varchar",
-                "name": "",
-                "params": [
-                  "state",
-                  "IN",
-                  "($state)"
-                ],
-                "type": "expression"
-              }
-            ]
-          },
-          {
-            "format": "time_series",
-            "group": [
-              {
-                "params": [
-                  "$__interval",
-                  "none"
-                ],
-                "type": "time"
-              }
-            ],
-            "metricColumn": "none",
-            "rawQuery": false,
-            "rawSql": "SELECT\n  $__timeGroupAlias(date,$__interval),\n  sum(death) AS \"Deaths\"\nFROM data_ctp\nWHERE\n  $__timeFilter(date) AND\n  state IN ($state)\nGROUP BY 1\nORDER BY $__timeGroup(date,$__interval)",
-            "refId": "B",
-            "select": [
-              [
-                {
-                  "params": [
-                    "death"
-                  ],
-                  "type": "column"
-                },
-                {
-                  "params": [
-                    "sum"
-                  ],
-                  "type": "aggregate"
-                },
-                {
-                  "params": [
-                    "Deaths"
-                  ],
-                  "type": "alias"
-                }
-              ]
-            ],
-            "table": "data_ctp",
-            "timeColumn": "date",
-            "timeColumnType": "timestamp",
-            "where": [
-              {
-                "name": "$__timeFilter",
-                "params": [],
-                "type": "macro"
-              },
-              {
-                "datatype": "varchar",
-                "name": "",
-                "params": [
-                  "state",
-                  "IN",
-                  "($state)"
-                ],
-                "type": "expression"
-              }
-            ]
-          }
-        ],
-        "thresholds": [],
-        "timeFrom": null,
-        "timeRegions": [],
-        "timeShift": null,
-        "title": "Hospitalizations & Deaths",
-        "tooltip": {
-          "shared": false,
-          "sort": 0,
-          "value_type": "individual"
-        },
-        "transparent": true,
-        "type": "graph",
-        "xaxis": {
-          "buckets": null,
-          "mode": "time",
-          "name": null,
-          "show": true,
-          "values": []
-        },
-        "yaxes": [
-          {
-            "format": "short",
-            "label": null,
-            "logBase": 1,
-            "max": null,
-            "min": null,
-            "show": true
-          },
-          {
-            "format": "short",
-            "label": null,
-            "logBase": 1,
-            "max": null,
-            "min": null,
-            "show": true
-          }
-        ],
-        "yaxis": {
-          "align": false,
-          "alignLevel": null
-        }
-      },
-      {
-        "aliasColors": {},
-        "bars": true,
-        "dashLength": 10,
-        "dashes": false,
-        "datasource": "CovidSource Aurora / Dev",
-        "description": "",
-        "fill": 1,
-        "fillGradient": 0,
-        "gridPos": {
-          "h": 6,
-          "w": 12,
-          "x": 0,
-          "y": 22
-        },
-        "hiddenSeries": false,
-        "hideTimeOverride": true,
-        "id": 5,
-        "legend": {
-          "alignAsTable": false,
-          "avg": false,
-          "current": false,
-          "hideEmpty": false,
-          "hideZero": false,
-          "max": false,
-          "min": false,
-          "rightSide": false,
-          "show": true,
-          "total": false,
-          "values": false
-        },
-        "lines": false,
-        "linewidth": 0,
-        "nullPointMode": "null",
-        "options": {
-          "dataLinks": [
-            {
-              "targetBlank": true,
-              "title": "Data by The COVID Tracking Project",
-              "url": "https://covidtracking.com/"
-            }
-          ]
-        },
-        "percentage": false,
-        "pointradius": 2,
-        "points": false,
-        "renderer": "flot",
-        "seriesOverrides": [
-          {
-            "alias": "Positives",
-            "color": "#FF9830"
-          },
-          {
-            "alias": "Tests",
-            "color": "rgb(232, 232, 232)"
-          }
-        ],
-        "spaceLength": 10,
-        "stack": false,
-        "steppedLine": false,
-        "targets": [
-          {
-            "format": "time_series",
-            "group": [
-              {
-                "params": [
-                  "$__interval",
-                  "none"
-                ],
-                "type": "time"
-              }
-            ],
-            "metricColumn": "none",
-            "rawQuery": false,
-            "rawSql": "SELECT\n  $__timeGroupAlias(date,$__interval),\n  sum(totalTestResultsIncrease) AS \"Tests\"\nFROM data_ctp\nWHERE\n  $__timeFilter(date) AND\n  state IN ($state)\nGROUP BY 1\nORDER BY $__timeGroup(date,$__interval)",
-            "refId": "A",
-            "select": [
-              [
-                {
-                  "params": [
-                    "totalTestResultsIncrease"
-                  ],
-                  "type": "column"
-                },
-                {
-                  "params": [
-                    "sum"
-                  ],
-                  "type": "aggregate"
-                },
-                {
-                  "params": [
-                    "Tests"
-                  ],
-                  "type": "alias"
-                }
-              ]
-            ],
-            "table": "data_ctp",
-            "timeColumn": "date",
-            "timeColumnType": "timestamp",
-            "where": [
-              {
-                "name": "$__timeFilter",
-                "params": [],
-                "type": "macro"
-              },
-              {
-                "datatype": "varchar",
-                "name": "",
-                "params": [
-                  "state",
-                  "IN",
-                  "($state)"
-                ],
-                "type": "expression"
-              }
-            ]
-          },
-          {
-            "format": "time_series",
-            "group": [
-              {
-                "params": [
-                  "$__interval",
-                  "none"
-                ],
-                "type": "time"
-              }
-            ],
-            "metricColumn": "none",
-            "rawQuery": false,
-            "rawSql": "SELECT\n  $__timeGroupAlias(date,$__interval),\n  sum(positiveIncrease) AS \"Positives\"\nFROM data_ctp\nWHERE\n  $__timeFilter(date) AND\n  state IN ($state)\nGROUP BY 1\nORDER BY $__timeGroup(date,$__interval)",
-            "refId": "B",
-            "select": [
-              [
-                {
-                  "params": [
-                    "positiveIncrease"
-                  ],
-                  "type": "column"
-                },
-                {
-                  "params": [
-                    "sum"
-                  ],
-                  "type": "aggregate"
-                },
-                {
-                  "params": [
-                    "Positives"
-                  ],
-                  "type": "alias"
-                }
-              ]
-            ],
-            "table": "data_ctp",
-            "timeColumn": "date",
-            "timeColumnType": "timestamp",
-            "where": [
-              {
-                "name": "$__timeFilter",
-                "params": [],
-                "type": "macro"
-              },
-              {
-                "datatype": "varchar",
-                "name": "",
-                "params": [
-                  "state",
-                  "IN",
-                  "($state)"
-                ],
-                "type": "expression"
-              }
-            ]
-          }
-        ],
-        "thresholds": [],
-        "timeFrom": null,
-        "timeRegions": [],
-        "timeShift": null,
-        "title": "Daily Positives vs. Daily Tests",
-        "tooltip": {
-          "shared": true,
-          "sort": 0,
-          "value_type": "individual"
-        },
-        "transparent": true,
-        "type": "graph",
-        "xaxis": {
-          "buckets": null,
-          "mode": "time",
-          "name": null,
-          "show": true,
-          "values": []
-        },
-        "yaxes": [
-          {
-            "format": "short",
-            "label": null,
-            "logBase": 1,
-            "max": null,
-            "min": null,
-            "show": true
-          },
-          {
-            "format": "short",
-            "label": null,
-            "logBase": 1,
-            "max": null,
-            "min": null,
-            "show": true
-          }
-        ],
-        "yaxis": {
-          "align": false,
-          "alignLevel": null
-        }
-      },
-      {
-        "aliasColors": {},
-        "bars": true,
-        "dashLength": 10,
-        "dashes": false,
-        "datasource": "CovidSource Aurora",
-        "description": "",
-        "fill": 1,
-        "fillGradient": 0,
-        "gridPos": {
-          "h": 6,
-          "w": 12,
-          "x": 12,
-          "y": 22
-        },
-        "hiddenSeries": false,
-        "hideTimeOverride": true,
-        "id": 4,
-        "legend": {
-          "alignAsTable": false,
-          "avg": false,
-          "current": false,
-          "hideEmpty": false,
-          "hideZero": false,
-          "max": false,
-          "min": false,
-          "rightSide": false,
-          "show": true,
-          "total": false,
-          "values": false
-        },
-        "lines": false,
-        "linewidth": 0,
-        "nullPointMode": "null",
-        "options": {
-          "dataLinks": [
-            {
-              "targetBlank": true,
-              "title": "Data by The COVID Tracking Project",
-              "url": "https://covidtracking.com/"
-            }
-          ]
-        },
-        "percentage": false,
-        "pointradius": 2,
-        "points": false,
-        "renderer": "flot",
-        "seriesOverrides": [
-          {
-            "alias": "Deaths",
-            "color": "#F2495C"
-          }
-        ],
-        "spaceLength": 10,
-        "stack": false,
-        "steppedLine": false,
-        "targets": [
-          {
-            "format": "time_series",
-            "group": [
-              {
-                "params": [
-                  "$__interval",
-                  "none"
-                ],
-                "type": "time"
-              }
-            ],
-            "metricColumn": "none",
-            "rawQuery": false,
-            "rawSql": "SELECT\n  $__timeGroupAlias(date,$__interval),\n  sum(deathIncrease) AS \"Deaths\"\nFROM data_ctp\nWHERE\n  $__timeFilter(date) AND\n  state IN ($state)\nGROUP BY 1\nORDER BY $__timeGroup(date,$__interval)",
-            "refId": "A",
-            "select": [
-              [
-                {
-                  "params": [
-                    "deathIncrease"
-                  ],
-                  "type": "column"
-                },
-                {
-                  "params": [
-                    "sum"
-                  ],
-                  "type": "aggregate"
-                },
-                {
-                  "params": [
-                    "Deaths"
-                  ],
-                  "type": "alias"
-                }
-              ]
-            ],
-            "table": "data_ctp",
-            "timeColumn": "date",
-            "timeColumnType": "timestamp",
-            "where": [
-              {
-                "name": "$__timeFilter",
-                "params": [],
-                "type": "macro"
-              },
-              {
-                "datatype": "varchar",
-                "name": "",
-                "params": [
-                  "state",
-                  "IN",
-                  "($state)"
-                ],
-                "type": "expression"
-              }
-            ]
-          }
-        ],
-        "thresholds": [],
-        "timeFrom": null,
-        "timeRegions": [],
-        "timeShift": null,
-        "title": "New Daily Deaths",
-        "tooltip": {
-          "shared": true,
-          "sort": 0,
-          "value_type": "individual"
-        },
-        "transparent": true,
-        "type": "graph",
-        "xaxis": {
-          "buckets": null,
-          "mode": "time",
-          "name": null,
-          "show": true,
-          "values": []
-        },
-        "yaxes": [
-          {
-            "format": "short",
-            "label": null,
-            "logBase": 1,
-            "max": null,
-            "min": null,
-            "show": true
-          },
-          {
-            "format": "short",
-            "label": null,
-            "logBase": 1,
-            "max": null,
-            "min": null,
-            "show": true
-          }
-        ],
-        "yaxis": {
-          "align": false,
-          "alignLevel": null
-        }
-      },
-      {
-        "content": "<div style=\"font-family: 'Source Code Pro', monospace;text-align:center;\">\n</br>\n<p>This data is sourced from <a href=\"https://covidtracking.com/\" target=\"_blank\">The COVID Tracking Project</a>, <a href=\"https://www.nytimes.com/interactive/2020/us/coronavirus-us-cases.html\" target=\"_blank\">The New York Times</a>, the <a href=\"https://census.gov\" target=\"_blank\">US Census Bureau</a> and the <a href=\"https://covid19.healthdata.org/projections\" target=\"_blank\">IHME</a>.\n</div>",
-        "datasource": null,
-        "gridPos": {
-          "h": 2,
-          "w": 24,
-          "x": 0,
-          "y": 28
-        },
-        "id": 12,
-        "mode": "html",
-        "timeFrom": null,
-        "timeShift": null,
-        "title": "",
-        "transparent": true,
-        "type": "text"
-      },
-      {
-        "content": "<div style=\"font-family: 'Source Code Pro', monospace;text-align:center;margin-top:10px;\">\n<table style=\"width:100%;border:none !important;margin-top:10px;\" border=0> \n    <tr style=\"text-align:center;border:none !important;\"> \n        <td width=\"30%\" style=\"border:none !important;\"><h1><a style=\"color:darkgray;\" href=\"https://www.youtube.com/channel/UC_D6qpdhkoJJZE_CGFyVhog\" target=\"_blank\"><img height=30 src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Logo_of_YouTube_%282015-2017%29.svg/502px-Logo_of_YouTube_%282015-2017%29.svg.png\"/></a></h1><small>watch the build</small></td>\n        <td width=\"30%\" style=\"border:none !important;\"><h1><a style=\"color:darkgray;\" href=\"https://www.twitch.tv/hrudotsh\" target=\"_blank\"><img height=30 src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Twitch_logo.svg/455px-Twitch_logo.svg.png\"/></a></h1><small>stream it live</small></td>\n        <td width=\"30%\" style=\"border:none !important;\"><h1><a style=\"color:darkgray;\" href=\"https://github.com/hrushka/covidsource\" target=\"_blank\"><img width=80 src=\"https://github.githubassets.com/images/modules/logos_page/GitHub-Logo.png\"/></a></h1><small>get the code</small></td>\n    </tr>\n</table>\n<small>Follow, use and contribute. ❤ &mdash; Matt <<a href=\"mailto:c19@hru.sh\">c19@hru.sh</a>><br/>v1.20200402</small>\n</div>",
-        "datasource": null,
-        "gridPos": {
-          "h": 5,
-          "w": 24,
-          "x": 0,
-          "y": 30
-        },
-        "id": 18,
-        "mode": "html",
-        "timeFrom": null,
-        "timeShift": null,
-        "title": "",
-        "transparent": true,
-        "type": "text"
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
       }
-    ],
-    "refresh": false,
-    "schemaVersion": 22,
-    "style": "dark",
-    "tags": [],
-    "templating": {
-      "list": [
+    ]
+  },
+  "editable": true,
+  "gnetId": null,
+  "graphTooltip": 0,
+  "id": 8,
+  "iteration": 1587696820124,
+  "links": [],
+  "panels": [
+    {
+      "collapsed": false,
+      "datasource": null,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 26,
+      "panels": [],
+      "title": "Rate Data",
+      "type": "row"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": false,
+      "colorPrefix": false,
+      "colorValue": false,
+      "colors": [
+        "#299c46",
+        "rgba(237, 129, 40, 0.89)",
+        "#d44a3a"
+      ],
+      "datasource": "CovidSource Aurora",
+      "decimals": 3,
+      "format": "percentunit",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 6,
+        "x": 0,
+        "y": 1
+      },
+      "id": 28,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
         {
-          "allValue": "",
-          "current": {
-            "selected": false,
-            "tags": [],
-            "text": "Illinois",
-            "value": "IL"
-          },
-          "datasource": "CovidSource Aurora",
-          "definition": "select state_abbv as __value, state_full as __text from data_us_data;",
-          "hide": 0,
-          "includeAll": true,
-          "index": -1,
-          "label": "Select a State",
-          "multi": false,
-          "name": "state",
-          "options": [],
-          "query": "select state_abbv as __value, state_full as __text from data_us_data;",
-          "refresh": 1,
-          "regex": "",
-          "skipUrlSync": false,
-          "sort": 1,
-          "tagValuesQuery": "",
-          "tags": [],
-          "tagsQuery": "",
-          "type": "query",
-          "useTags": false
+          "name": "value to text",
+          "value": 1
         },
         {
-          "allValue": null,
-          "current": {
-            "text": "12671821",
-            "value": "12671821"
-          },
-          "datasource": "CovidSource Aurora",
-          "definition": "SELECT SUM(usc_population_2019) as pop\nFROM data_us_data\nWHERE\n  state_abbv IN ($state)",
-          "hide": 2,
-          "includeAll": false,
-          "index": -1,
-          "label": null,
-          "multi": false,
-          "name": "population",
-          "options": [],
-          "query": "SELECT SUM(usc_population_2019) as pop\nFROM data_us_data\nWHERE\n  state_abbv IN ($state)",
-          "refresh": 1,
-          "regex": "",
-          "skipUrlSync": false,
-          "sort": 0,
-          "tagValuesQuery": "",
-          "tags": [],
-          "tagsQuery": "",
-          "type": "query",
-          "useTags": false
-        },
-        {
-          "allValue": null,
-          "current": {
-            "text": "193.8534811055098",
-            "value": "193.8534811055098"
-          },
-          "datasource": "CovidSource Aurora",
-          "definition": "SELECT AVG(usc_density_2019) as density\nFROM data_us_data\nWHERE\n  state_abbv IN ($state)",
-          "hide": 2,
-          "includeAll": false,
-          "index": -1,
-          "label": null,
-          "multi": false,
-          "name": "density",
-          "options": [],
-          "query": "SELECT AVG(usc_density_2019) as density\nFROM data_us_data\nWHERE\n  state_abbv IN ($state)",
-          "refresh": 1,
-          "regex": "",
-          "skipUrlSync": false,
-          "sort": 0,
-          "tagValuesQuery": "",
-          "tags": [],
-          "tagsQuery": "",
-          "type": "query",
-          "useTags": false
-        },
-        {
-          "allValue": null,
-          "current": {
-            "text": "17892",
-            "value": "17892"
-          },
-          "datasource": "CovidSource Aurora",
-          "definition": "SELECT SUM(cases) as cases\nFROM data_nyt_county \nWHERE state_abbv IN ($state) \nAND date = (SELECT MAX( date ) FROM data_nyt_county WHERE state_abbv IN ($state))",
-          "hide": 2,
-          "includeAll": false,
-          "index": -1,
-          "label": null,
-          "multi": false,
-          "name": "total_cases",
-          "options": [],
-          "query": "SELECT SUM(cases) as cases\nFROM data_nyt_county \nWHERE state_abbv IN ($state) \nAND date = (SELECT MAX( date ) FROM data_nyt_county WHERE state_abbv IN ($state))",
-          "refresh": 2,
-          "regex": "",
-          "skipUrlSync": false,
-          "sort": 0,
-          "tagValuesQuery": "",
-          "tags": [],
-          "tagsQuery": "",
-          "type": "query",
-          "useTags": false
-        },
-        {
-          "allValue": null,
-          "current": {
-            "text": "608",
-            "value": "608"
-          },
-          "datasource": "CovidSource Aurora",
-          "definition": "SELECT SUM(deaths) as deaths\nFROM data_nyt_county \nWHERE state_abbv IN ($state) \nAND date = (SELECT MAX( date ) FROM data_nyt_county WHERE state_abbv IN ($state))",
-          "hide": 2,
-          "includeAll": false,
-          "index": -1,
-          "label": null,
-          "multi": false,
-          "name": "total_deaths",
-          "options": [],
-          "query": "SELECT SUM(deaths) as deaths\nFROM data_nyt_county \nWHERE state_abbv IN ($state) \nAND date = (SELECT MAX( date ) FROM data_nyt_county WHERE state_abbv IN ($state))",
-          "refresh": 2,
-          "regex": "",
-          "skipUrlSync": false,
-          "sort": 0,
-          "tagValuesQuery": "",
-          "tags": [],
-          "tagsQuery": "",
-          "type": "query",
-          "useTags": false
+          "name": "range to text",
+          "value": 2
         }
-      ]
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": false,
+        "lineColor": "rgb(31, 120, 193)",
+        "show": false,
+        "ymax": null,
+        "ymin": null
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  date AS \"time\",\n  CAST(SUM(positive) / $population as DECIMAL(10,8)) AS \"Prevalence\"\nFROM data_ctp\nWHERE\n  state IN($state)AND $__timeFilter(date)\nGROUP BY 1\nORDER BY $__timeGroup(date,$__interval)",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "positive"
+                ],
+                "type": "column"
+              },
+              {
+                "params": [
+                  "positive"
+                ],
+                "type": "alias"
+              }
+            ]
+          ],
+          "table": "data_ctp",
+          "timeColumn": "date",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "datatype": "varchar",
+              "name": "",
+              "params": [
+                "state",
+                "=",
+                "'$state'"
+              ],
+              "type": "expression"
+            }
+          ]
+        }
+      ],
+      "thresholds": "",
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Prevalence Rate",
+      "transparent": true,
+      "type": "singlestat",
+      "valueFontSize": "80%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "N/A",
+          "value": "null"
+        }
+      ],
+      "valueName": "current"
     },
-    "time": {
-      "from": "now-30d",
-      "to": "now"
+    {
+      "cacheTimeout": null,
+      "colorBackground": false,
+      "colorValue": false,
+      "colors": [
+        "#299c46",
+        "rgba(237, 129, 40, 0.89)",
+        "#d44a3a"
+      ],
+      "datasource": "CovidSource Aurora",
+      "decimals": 3,
+      "format": "short",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 6,
+        "x": 6,
+        "y": 1
+      },
+      "id": 29,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": false,
+        "lineColor": "rgb(31, 120, 193)",
+        "show": false,
+        "ymax": null,
+        "ymin": null
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  date AS \"time\",\n  CAST((SUM(positiveIncrease) / $population) * 1000 as DECIMAL(10,8)) AS \"Incidence Rate\"\nFROM data_ctp\nWHERE\n  state IN($state) AND $__timeFilter(date)\nGROUP BY 1\nORDER BY $__timeGroup(date,$__interval)",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "positive"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "data_ctp",
+          "timeColumn": "date",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "thresholds": "",
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Incidence Rate",
+      "transparent": true,
+      "type": "singlestat",
+      "valueFontSize": "80%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "N/A",
+          "value": "null"
+        }
+      ],
+      "valueName": "current"
     },
-    "timepicker": {
-      "refresh_intervals": [
-        "5s",
-        "10s",
-        "30s",
-        "1m",
-        "5m",
-        "15m",
-        "30m",
-        "1h",
-        "2h",
-        "1d"
-      ]
+    {
+      "cacheTimeout": null,
+      "colorBackground": false,
+      "colorValue": false,
+      "colors": [
+        "#299c46",
+        "rgba(237, 129, 40, 0.89)",
+        "#d44a3a"
+      ],
+      "datasource": "CovidSource Aurora",
+      "decimals": null,
+      "description": "",
+      "format": "percent",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 6,
+        "x": 12,
+        "y": 1
+      },
+      "id": 37,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": false,
+        "lineColor": "rgb(31, 120, 193)",
+        "show": false,
+        "ymax": null,
+        "ymin": null
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "format": "time_series",
+          "group": [
+            {
+              "params": [
+                "$__interval",
+                "none"
+              ],
+              "type": "time"
+            }
+          ],
+          "metricColumn": "none",
+          "rawQuery": false,
+          "rawSql": "SELECT\n  $__timeGroupAlias(date,$__interval),\n  avg(transit_stations_percent_change_from_baseline) AS \"transit_stations_percent_change_from_baseline\"\nFROM data_google\nWHERE\n  $__timeFilter(date) AND\n  state_abbv IN ($state)\nGROUP BY 1\nORDER BY $__timeGroup(date,$__interval)",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "transit_stations_percent_change_from_baseline"
+                ],
+                "type": "column"
+              },
+              {
+                "params": [
+                  "avg"
+                ],
+                "type": "aggregate"
+              },
+              {
+                "params": [
+                  "transit_stations_percent_change_from_baseline"
+                ],
+                "type": "alias"
+              }
+            ]
+          ],
+          "table": "data_google",
+          "timeColumn": "date",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            },
+            {
+              "datatype": "varchar",
+              "name": "",
+              "params": [
+                "state_abbv",
+                "IN",
+                "($state)"
+              ],
+              "type": "expression"
+            }
+          ]
+        }
+      ],
+      "thresholds": "",
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Mobility (Transit)",
+      "transparent": true,
+      "type": "singlestat",
+      "valueFontSize": "80%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "N/A",
+          "value": "null"
+        }
+      ],
+      "valueName": "current"
     },
-    "timezone": "",
-    "title": "COVID-19 US State Data",
-    "uid": "4S5AN4CZz",
-    "variables": {
-      "list": []
+    {
+      "cacheTimeout": null,
+      "colorBackground": false,
+      "colorValue": false,
+      "colors": [
+        "#299c46",
+        "rgba(237, 129, 40, 0.89)",
+        "#d44a3a"
+      ],
+      "datasource": "CovidSource Aurora",
+      "decimals": 3,
+      "format": "percentunit",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 6,
+        "x": 18,
+        "y": 1
+      },
+      "id": 30,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": false,
+        "lineColor": "rgb(31, 120, 193)",
+        "show": false,
+        "ymax": null,
+        "ymin": null
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  date AS \"time\",\n  CAST(SUM(death) / SUM(positive) as DECIMAL(10,8)) AS \"CFR\"\nFROM data_ctp\nWHERE\n  state IN($state) AND $__timeFilter(date)\nGROUP BY 1\nORDER BY $__timeGroup(date,$__interval)",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "positive"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "data_ctp",
+          "timeColumn": "date",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "thresholds": "",
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Case Fatality Rate (CFR)",
+      "transparent": true,
+      "type": "singlestat",
+      "valueFontSize": "80%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "N/A",
+          "value": "null"
+        }
+      ],
+      "valueName": "current"
     },
-    "version": 15
-  }
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "CovidSource Aurora",
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 7,
+        "w": 6,
+        "x": 0,
+        "y": 3
+      },
+      "hiddenSeries": false,
+      "id": 20,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": false,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [
+        {
+          "alias": "Prevalence",
+          "color": "#FF9830"
+        }
+      ],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  date AS \"time\",\n  CAST(SUM(positive) / $population as DECIMAL(10,8)) AS \"Prevalence\"\nFROM data_ctp\nWHERE\n  state IN($state)AND $__timeFilter(date)\nGROUP BY 1\nORDER BY $__timeGroup(date,$__interval)",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "positive"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "data_ctp",
+          "timeColumn": "date",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Prevalence Rate Over Time",
+      "tooltip": {
+        "shared": false,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "transparent": true,
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "decimals": 4,
+          "format": "percentunit",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "CovidSource Aurora",
+      "description": "This pannel compares the Incidence Rate (the increase in positives divided by the population) with anonymous change in mobility data from Google. The mobility data is compared with a baseline taken from Jan 3–Feb 6, 2020. This data is updated, every week or so.",
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 6,
+        "y": 3
+      },
+      "hiddenSeries": false,
+      "id": 21,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [
+        {
+          "alias": "Incidence Rate",
+          "color": "#B877D9",
+          "linewidth": 2
+        },
+        {
+          "alias": "Pharmacy & Grocery",
+          "color": "#73BF69",
+          "dashes": true,
+          "fillGradient": 2,
+          "spaceLength": 2,
+          "yaxis": 2
+        },
+        {
+          "alias": "Transit",
+          "color": "#8AB8FF",
+          "dashes": true,
+          "fillGradient": 1,
+          "spaceLength": 2,
+          "yaxis": 2
+        },
+        {
+          "alias": "Workplace",
+          "color": "#FF7383",
+          "dashes": true,
+          "fillGradient": 1,
+          "spaceLength": 2,
+          "yaxis": 2
+        },
+        {
+          "alias": "US Average",
+          "color": "#CA95E5",
+          "fillGradient": 1,
+          "linewidth": 1
+        },
+        {
+          "alias": "Retail",
+          "color": "#FF9830",
+          "dashes": true,
+          "fillGradient": 1,
+          "spaceLength": 2,
+          "yaxis": 2
+        }
+      ],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  date AS \"time\",\n  CAST((SUM(positiveIncrease) / $population) * 1000 as DECIMAL(10,8)) AS \"Incidence Rate\"\nFROM data_ctp\nWHERE\n  state IN($state) AND $__timeFilter(date)\nGROUP BY 1\nORDER BY $__timeGroup(date,$__interval)",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "positive"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "data_ctp",
+          "timeColumn": "date",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        },
+        {
+          "format": "time_series",
+          "group": [
+            {
+              "params": [
+                "$__interval",
+                "none"
+              ],
+              "type": "time"
+            }
+          ],
+          "metricColumn": "none",
+          "rawQuery": false,
+          "rawSql": "SELECT\n  $__timeGroupAlias(date,$__interval),\n  avg(grocery_and_pharmacy_percent_change_from_baseline) AS \"Pharmacy & Grocery\"\nFROM data_google\nWHERE\n  $__timeFilter(date) AND\n  state_abbv IN ($state)\nGROUP BY 1\nORDER BY $__timeGroup(date,$__interval)",
+          "refId": "B",
+          "select": [
+            [
+              {
+                "params": [
+                  "grocery_and_pharmacy_percent_change_from_baseline"
+                ],
+                "type": "column"
+              },
+              {
+                "params": [
+                  "avg"
+                ],
+                "type": "aggregate"
+              },
+              {
+                "params": [
+                  "Pharmacy & Grocery"
+                ],
+                "type": "alias"
+              }
+            ]
+          ],
+          "table": "data_google",
+          "timeColumn": "date",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            },
+            {
+              "datatype": "varchar",
+              "name": "",
+              "params": [
+                "state_abbv",
+                "IN",
+                "($state)"
+              ],
+              "type": "expression"
+            }
+          ]
+        },
+        {
+          "format": "time_series",
+          "group": [
+            {
+              "params": [
+                "$__interval",
+                "none"
+              ],
+              "type": "time"
+            }
+          ],
+          "metricColumn": "none",
+          "rawQuery": false,
+          "rawSql": "SELECT\n  $__timeGroupAlias(date,$__interval),\n  avg(transit_stations_percent_change_from_baseline) AS \"Transit\"\nFROM data_google\nWHERE\n  $__timeFilter(date) AND\n  state_abbv IN ($state)\nGROUP BY 1\nORDER BY $__timeGroup(date,$__interval)",
+          "refId": "C",
+          "select": [
+            [
+              {
+                "params": [
+                  "transit_stations_percent_change_from_baseline"
+                ],
+                "type": "column"
+              },
+              {
+                "params": [
+                  "avg"
+                ],
+                "type": "aggregate"
+              },
+              {
+                "params": [
+                  "Transit"
+                ],
+                "type": "alias"
+              }
+            ]
+          ],
+          "table": "data_google",
+          "timeColumn": "date",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            },
+            {
+              "datatype": "varchar",
+              "name": "",
+              "params": [
+                "state_abbv",
+                "IN",
+                "($state)"
+              ],
+              "type": "expression"
+            }
+          ]
+        },
+        {
+          "format": "time_series",
+          "group": [
+            {
+              "params": [
+                "$__interval",
+                "none"
+              ],
+              "type": "time"
+            }
+          ],
+          "metricColumn": "none",
+          "rawQuery": false,
+          "rawSql": "SELECT\n  $__timeGroupAlias(date,$__interval),\n  avg(workplaces_percent_change_from_baseline) AS \"Workplace\"\nFROM data_google\nWHERE\n  $__timeFilter(date) AND\n  state_abbv IN ($state)\nGROUP BY 1\nORDER BY $__timeGroup(date,$__interval)",
+          "refId": "D",
+          "select": [
+            [
+              {
+                "params": [
+                  "workplaces_percent_change_from_baseline"
+                ],
+                "type": "column"
+              },
+              {
+                "params": [
+                  "avg"
+                ],
+                "type": "aggregate"
+              },
+              {
+                "params": [
+                  "Workplace"
+                ],
+                "type": "alias"
+              }
+            ]
+          ],
+          "table": "data_google",
+          "timeColumn": "date",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            },
+            {
+              "datatype": "varchar",
+              "name": "",
+              "params": [
+                "state_abbv",
+                "IN",
+                "($state)"
+              ],
+              "type": "expression"
+            }
+          ]
+        },
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  date AS \"time\",\n  CAST((SUM(positiveIncrease) / 331000000) * 1000 as DECIMAL(10,8)) AS \"US Average\"\nFROM data_ctp\nWHERE\n  $__timeFilter(date)\nGROUP BY 1\nORDER BY $__timeGroup(date,$__interval)",
+          "refId": "E",
+          "select": [
+            [
+              {
+                "params": [
+                  "positive"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "data_ctp",
+          "timeColumn": "date",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        },
+        {
+          "format": "time_series",
+          "group": [
+            {
+              "params": [
+                "$__interval",
+                "none"
+              ],
+              "type": "time"
+            }
+          ],
+          "metricColumn": "none",
+          "rawQuery": false,
+          "rawSql": "SELECT\n  $__timeGroupAlias(date,$__interval),\n  avg(retail_and_recreation_percent_change_from_baseline) AS \"Retail\"\nFROM data_google\nWHERE\n  $__timeFilter(date) AND\n  state_abbv IN ($state)\nGROUP BY 1\nORDER BY $__timeGroup(date,$__interval)",
+          "refId": "F",
+          "select": [
+            [
+              {
+                "params": [
+                  "retail_and_recreation_percent_change_from_baseline"
+                ],
+                "type": "column"
+              },
+              {
+                "params": [
+                  "avg"
+                ],
+                "type": "aggregate"
+              },
+              {
+                "params": [
+                  "Retail"
+                ],
+                "type": "alias"
+              }
+            ]
+          ],
+          "table": "data_google",
+          "timeColumn": "date",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            },
+            {
+              "datatype": "varchar",
+              "name": "",
+              "params": [
+                "state_abbv",
+                "IN",
+                "($state)"
+              ],
+              "type": "expression"
+            }
+          ]
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Incidence Rate vs. Mobility",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "transparent": true,
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "decimals": 2,
+          "format": "short",
+          "label": "Incidence Rate",
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "percent",
+          "label": "Change in Mobility",
+          "logBase": 1,
+          "max": "100",
+          "min": "-100",
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": true,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "CovidSource Aurora",
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 7,
+        "w": 6,
+        "x": 18,
+        "y": 3
+      },
+      "hiddenSeries": false,
+      "id": 22,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": false,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [
+        {
+          "alias": "CFR",
+          "color": "#5794F2"
+        }
+      ],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  date AS \"time\",\n  CAST(SUM(death) / SUM(positive) as DECIMAL(10,8)) AS \"CFR\"\nFROM data_ctp\nWHERE\n  state IN($state) AND $__timeFilter(date)\nGROUP BY 1\nORDER BY $__timeGroup(date,$__interval)",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "positive"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "data_ctp",
+          "timeColumn": "date",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "CFR Over Time",
+      "tooltip": {
+        "shared": false,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "transparent": true,
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "percentunit",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "collapsed": false,
+      "datasource": null,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 10
+      },
+      "id": 24,
+      "panels": [],
+      "title": "Testing & Mortality",
+      "type": "row"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": false,
+      "colorValue": false,
+      "colors": [
+        "#299c46",
+        "rgba(237, 129, 40, 0.89)",
+        "#d44a3a"
+      ],
+      "datasource": "CovidSource Aurora",
+      "decimals": null,
+      "format": "short",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 0,
+        "y": 11
+      },
+      "id": 9,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "sparkline": {
+        "fillColor": "#FFB357",
+        "full": false,
+        "lineColor": "#FF9830",
+        "show": true,
+        "ymax": null,
+        "ymin": null
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "format": "time_series",
+          "group": [
+            {
+              "params": [
+                "$__interval",
+                "none"
+              ],
+              "type": "time"
+            }
+          ],
+          "metricColumn": "none",
+          "rawQuery": false,
+          "rawSql": "SELECT\n  $__timeGroupAlias(date,$__interval),\n  sum(positive) AS \"positive\"\nFROM data_ctp\nWHERE\n  $__timeFilter(date) AND\n  state IN ($state)\nGROUP BY 1\nORDER BY $__timeGroup(date,$__interval)",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "positive"
+                ],
+                "type": "column"
+              },
+              {
+                "params": [
+                  "sum"
+                ],
+                "type": "aggregate"
+              },
+              {
+                "params": [
+                  "positive"
+                ],
+                "type": "alias"
+              }
+            ]
+          ],
+          "table": "data_ctp",
+          "timeColumn": "date",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            },
+            {
+              "datatype": "varchar",
+              "name": "",
+              "params": [
+                "state",
+                "IN",
+                "($state)"
+              ],
+              "type": "expression"
+            }
+          ]
+        }
+      ],
+      "thresholds": "",
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Positive Cases",
+      "transparent": true,
+      "type": "singlestat",
+      "valueFontSize": "80%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "N/A",
+          "value": "null"
+        }
+      ],
+      "valueName": "current"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": false,
+      "colorValue": false,
+      "colors": [
+        "#299c46",
+        "rgba(237, 129, 40, 0.89)",
+        "#d44a3a"
+      ],
+      "datasource": "CovidSource Aurora",
+      "format": "short",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 6,
+        "y": 11
+      },
+      "id": 8,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "sparkline": {
+        "fillColor": "#8AB8FF",
+        "full": false,
+        "lineColor": "#5794F2",
+        "show": true,
+        "ymax": null,
+        "ymin": null
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "format": "time_series",
+          "group": [
+            {
+              "params": [
+                "$__interval",
+                "none"
+              ],
+              "type": "time"
+            }
+          ],
+          "metricColumn": "none",
+          "rawQuery": false,
+          "rawSql": "SELECT\n  $__timeGroupAlias(date,$__interval),\n  sum(totalTestResults) AS \"totalTestResults\"\nFROM data_ctp\nWHERE\n  $__timeFilter(date) AND\n  state IN ($state)\nGROUP BY 1\nORDER BY $__timeGroup(date,$__interval)",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "totalTestResults"
+                ],
+                "type": "column"
+              },
+              {
+                "params": [
+                  "sum"
+                ],
+                "type": "aggregate"
+              },
+              {
+                "params": [
+                  "totalTestResults"
+                ],
+                "type": "alias"
+              }
+            ]
+          ],
+          "table": "data_ctp",
+          "timeColumn": "date",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            },
+            {
+              "datatype": "varchar",
+              "name": "",
+              "params": [
+                "state",
+                "IN",
+                "($state)"
+              ],
+              "type": "expression"
+            }
+          ]
+        }
+      ],
+      "thresholds": "",
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Total Tests",
+      "transparent": true,
+      "type": "singlestat",
+      "valueFontSize": "80%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "N/A",
+          "value": "null"
+        }
+      ],
+      "valueName": "current"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": false,
+      "colorValue": false,
+      "colors": [
+        "#299c46",
+        "rgba(237, 129, 40, 0.89)",
+        "#d44a3a"
+      ],
+      "datasource": "CovidSource Aurora",
+      "format": "short",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 12,
+        "y": 11
+      },
+      "id": 7,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "sparkline": {
+        "fillColor": "rgb(237, 237, 237)",
+        "full": false,
+        "lineColor": "rgb(122, 122, 122)",
+        "show": true,
+        "ymax": null,
+        "ymin": null
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  $__timeGroupAlias(date,$__interval),\n  (SUM(totalTestResults) / ($population/1000)) AS \"totalTestResults\"\nFROM data_ctp\nWHERE\n  $__timeFilter(date) AND\n  state IN ($state)\nGROUP BY 1\nORDER BY $__timeGroup(date,$__interval)",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "positive"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "data_ctp",
+          "timeColumn": "date",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "thresholds": "",
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Tests per Thousand",
+      "transparent": true,
+      "type": "singlestat",
+      "valueFontSize": "80%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "N/A",
+          "value": "null"
+        }
+      ],
+      "valueName": "current"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": false,
+      "colorValue": false,
+      "colors": [
+        "#299c46",
+        "rgba(237, 129, 40, 0.89)",
+        "#d44a3a"
+      ],
+      "datasource": "CovidSource Aurora",
+      "format": "short",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 18,
+        "y": 11
+      },
+      "id": 10,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "sparkline": {
+        "fillColor": "#FF7383",
+        "full": false,
+        "lineColor": "#F2495C",
+        "show": true,
+        "ymax": null,
+        "ymin": null
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "format": "time_series",
+          "group": [
+            {
+              "params": [
+                "$__interval",
+                "none"
+              ],
+              "type": "time"
+            }
+          ],
+          "metricColumn": "none",
+          "rawQuery": false,
+          "rawSql": "SELECT\n  $__timeGroupAlias(date,$__interval),\n  sum(death) AS \"death\"\nFROM data_ctp\nWHERE\n  state IN ($state)\nGROUP BY 1\nORDER BY $__timeGroup(date,$__interval)",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "death"
+                ],
+                "type": "column"
+              },
+              {
+                "params": [
+                  "sum"
+                ],
+                "type": "aggregate"
+              },
+              {
+                "params": [
+                  "death"
+                ],
+                "type": "alias"
+              }
+            ]
+          ],
+          "table": "data_ctp",
+          "timeColumn": "date",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "datatype": "varchar",
+              "name": "",
+              "params": [
+                "state",
+                "IN",
+                "($state)"
+              ],
+              "type": "expression"
+            }
+          ]
+        }
+      ],
+      "thresholds": "",
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Total Deaths",
+      "transparent": true,
+      "type": "singlestat",
+      "valueFontSize": "80%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "N/A",
+          "value": "null"
+        }
+      ],
+      "valueName": "current"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "CovidSource Aurora",
+      "description": "",
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 0,
+        "y": 14
+      },
+      "hiddenSeries": false,
+      "hideTimeOverride": true,
+      "id": 2,
+      "legend": {
+        "alignAsTable": false,
+        "avg": false,
+        "current": false,
+        "hideEmpty": false,
+        "hideZero": false,
+        "max": false,
+        "min": false,
+        "rightSide": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": [
+          {
+            "targetBlank": true,
+            "title": "Data by The COVID Tracking Project",
+            "url": "https://covidtracking.com/"
+          }
+        ]
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [
+        {
+          "alias": "Total",
+          "color": "#5794F2"
+        },
+        {
+          "alias": "Positive",
+          "color": "#FF9830"
+        },
+        {
+          "alias": "Negative",
+          "color": "#73BF69"
+        },
+        {
+          "alias": "Pending",
+          "color": "#B877D9"
+        }
+      ],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "format": "time_series",
+          "group": [
+            {
+              "params": [
+                "$__interval",
+                "none"
+              ],
+              "type": "time"
+            }
+          ],
+          "metricColumn": "none",
+          "rawQuery": false,
+          "rawSql": "SELECT\n  $__timeGroupAlias(date,$__interval),\n  sum(totalTestResults) AS \"Total\"\nFROM data_ctp\nWHERE\n  $__timeFilter(date) AND\n  state IN ($state)\nGROUP BY 1\nORDER BY $__timeGroup(date,$__interval)",
+          "refId": "D",
+          "select": [
+            [
+              {
+                "params": [
+                  "totalTestResults"
+                ],
+                "type": "column"
+              },
+              {
+                "params": [
+                  "sum"
+                ],
+                "type": "aggregate"
+              },
+              {
+                "params": [
+                  "Total"
+                ],
+                "type": "alias"
+              }
+            ]
+          ],
+          "table": "data_ctp",
+          "timeColumn": "date",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            },
+            {
+              "datatype": "varchar",
+              "name": "",
+              "params": [
+                "state",
+                "IN",
+                "($state)"
+              ],
+              "type": "expression"
+            }
+          ]
+        },
+        {
+          "format": "time_series",
+          "group": [
+            {
+              "params": [
+                "$__interval",
+                "none"
+              ],
+              "type": "time"
+            }
+          ],
+          "metricColumn": "none",
+          "rawQuery": false,
+          "rawSql": "SELECT\n  $__timeGroupAlias(date,$__interval),\n  sum(positive) AS \"Positive\"\nFROM data_ctp\nWHERE\n  $__timeFilter(date) AND\n  state IN ($state)\nGROUP BY 1\nORDER BY $__timeGroup(date,$__interval)",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "positive"
+                ],
+                "type": "column"
+              },
+              {
+                "params": [
+                  "sum"
+                ],
+                "type": "aggregate"
+              },
+              {
+                "params": [
+                  "Positive"
+                ],
+                "type": "alias"
+              }
+            ]
+          ],
+          "table": "data_ctp",
+          "timeColumn": "date",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            },
+            {
+              "datatype": "varchar",
+              "name": "",
+              "params": [
+                "state",
+                "IN",
+                "($state)"
+              ],
+              "type": "expression"
+            }
+          ]
+        },
+        {
+          "format": "time_series",
+          "group": [
+            {
+              "params": [
+                "$__interval",
+                "none"
+              ],
+              "type": "time"
+            }
+          ],
+          "metricColumn": "none",
+          "rawQuery": false,
+          "rawSql": "SELECT\n  $__timeGroupAlias(date,$__interval),\n  sum(negative) AS \"Negative\"\nFROM data_ctp\nWHERE\n  $__timeFilter(date) AND\n  state IN ($state)\nGROUP BY 1\nORDER BY $__timeGroup(date,$__interval)",
+          "refId": "B",
+          "select": [
+            [
+              {
+                "params": [
+                  "negative"
+                ],
+                "type": "column"
+              },
+              {
+                "params": [
+                  "sum"
+                ],
+                "type": "aggregate"
+              },
+              {
+                "params": [
+                  "Negative"
+                ],
+                "type": "alias"
+              }
+            ]
+          ],
+          "table": "data_ctp",
+          "timeColumn": "date",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            },
+            {
+              "datatype": "varchar",
+              "name": "",
+              "params": [
+                "state",
+                "IN",
+                "($state)"
+              ],
+              "type": "expression"
+            }
+          ]
+        },
+        {
+          "format": "time_series",
+          "group": [
+            {
+              "params": [
+                "$__interval",
+                "none"
+              ],
+              "type": "time"
+            }
+          ],
+          "metricColumn": "none",
+          "rawQuery": false,
+          "rawSql": "SELECT\n  $__timeGroupAlias(date,$__interval),\n  sum(pending) AS \"Pending\"\nFROM data_ctp\nWHERE\n  $__timeFilter(date) AND\n  state IN ($state)\nGROUP BY 1\nORDER BY $__timeGroup(date,$__interval)",
+          "refId": "C",
+          "select": [
+            [
+              {
+                "params": [
+                  "pending"
+                ],
+                "type": "column"
+              },
+              {
+                "params": [
+                  "sum"
+                ],
+                "type": "aggregate"
+              },
+              {
+                "params": [
+                  "Pending"
+                ],
+                "type": "alias"
+              }
+            ]
+          ],
+          "table": "data_ctp",
+          "timeColumn": "date",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            },
+            {
+              "datatype": "varchar",
+              "name": "",
+              "params": [
+                "state",
+                "IN",
+                "($state)"
+              ],
+              "type": "expression"
+            }
+          ]
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Testing Data",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "transparent": true,
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "CovidSource Aurora",
+      "description": "",
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 12,
+        "y": 14
+      },
+      "hiddenSeries": false,
+      "hideTimeOverride": true,
+      "id": 3,
+      "legend": {
+        "alignAsTable": false,
+        "avg": false,
+        "current": false,
+        "hideEmpty": false,
+        "hideZero": false,
+        "max": false,
+        "min": false,
+        "rightSide": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": [
+          {
+            "targetBlank": true,
+            "title": "Data by The COVID Tracking Project",
+            "url": "https://covidtracking.com/"
+          }
+        ]
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [
+        {
+          "alias": "Deaths",
+          "color": "#F2495C"
+        },
+        {
+          "alias": "Hospitalized",
+          "color": "#B877D9"
+        }
+      ],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "format": "time_series",
+          "group": [
+            {
+              "params": [
+                "$__interval",
+                "none"
+              ],
+              "type": "time"
+            }
+          ],
+          "metricColumn": "none",
+          "rawQuery": false,
+          "rawSql": "SELECT\n  $__timeGroupAlias(date,$__interval),\n  sum(hospitalizedCumulative) AS \"Hospitalized\"\nFROM data_ctp\nWHERE\n  $__timeFilter(date) AND\n  state IN ($state)\nGROUP BY 1\nORDER BY $__timeGroup(date,$__interval)",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "hospitalizedCumulative"
+                ],
+                "type": "column"
+              },
+              {
+                "params": [
+                  "sum"
+                ],
+                "type": "aggregate"
+              },
+              {
+                "params": [
+                  "Hospitalized"
+                ],
+                "type": "alias"
+              }
+            ]
+          ],
+          "table": "data_ctp",
+          "timeColumn": "date",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            },
+            {
+              "datatype": "varchar",
+              "name": "",
+              "params": [
+                "state",
+                "IN",
+                "($state)"
+              ],
+              "type": "expression"
+            }
+          ]
+        },
+        {
+          "format": "time_series",
+          "group": [
+            {
+              "params": [
+                "$__interval",
+                "none"
+              ],
+              "type": "time"
+            }
+          ],
+          "metricColumn": "none",
+          "rawQuery": false,
+          "rawSql": "SELECT\n  $__timeGroupAlias(date,$__interval),\n  sum(death) AS \"Deaths\"\nFROM data_ctp\nWHERE\n  $__timeFilter(date) AND\n  state IN ($state)\nGROUP BY 1\nORDER BY $__timeGroup(date,$__interval)",
+          "refId": "B",
+          "select": [
+            [
+              {
+                "params": [
+                  "death"
+                ],
+                "type": "column"
+              },
+              {
+                "params": [
+                  "sum"
+                ],
+                "type": "aggregate"
+              },
+              {
+                "params": [
+                  "Deaths"
+                ],
+                "type": "alias"
+              }
+            ]
+          ],
+          "table": "data_ctp",
+          "timeColumn": "date",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            },
+            {
+              "datatype": "varchar",
+              "name": "",
+              "params": [
+                "state",
+                "IN",
+                "($state)"
+              ],
+              "type": "expression"
+            }
+          ]
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Hospitalizations & Deaths",
+      "tooltip": {
+        "shared": false,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "transparent": true,
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {
+        "US Average": "light-purple"
+      },
+      "bars": true,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "CovidSource Aurora / Dev",
+      "description": "",
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 0,
+        "y": 21
+      },
+      "hiddenSeries": false,
+      "hideTimeOverride": true,
+      "id": 5,
+      "legend": {
+        "alignAsTable": false,
+        "avg": false,
+        "current": false,
+        "hideEmpty": false,
+        "hideZero": false,
+        "max": false,
+        "min": false,
+        "rightSide": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": false,
+      "linewidth": 0,
+      "nullPointMode": "connected",
+      "options": {
+        "dataLinks": [
+          {
+            "targetBlank": true,
+            "title": "Data by The COVID Tracking Project",
+            "url": "https://covidtracking.com/"
+          }
+        ]
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [
+        {
+          "alias": "Positive Count",
+          "color": "#FF9830"
+        },
+        {
+          "alias": "Test Count",
+          "color": "rgb(232, 232, 232)"
+        },
+        {
+          "alias": "Positive %",
+          "bars": false,
+          "color": "#FF9830",
+          "fill": 0,
+          "lines": true,
+          "linewidth": 1,
+          "yaxis": 2,
+          "zindex": 3
+        },
+        {
+          "alias": "US Avg. %",
+          "bars": false,
+          "color": "#FFB357",
+          "fill": 0,
+          "lines": true,
+          "linewidth": 1,
+          "yaxis": 2
+        }
+      ],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "format": "time_series",
+          "group": [
+            {
+              "params": [
+                "$__interval",
+                "none"
+              ],
+              "type": "time"
+            }
+          ],
+          "metricColumn": "none",
+          "rawQuery": false,
+          "rawSql": "SELECT\n  $__timeGroupAlias(date,$__interval),\n  sum(totalTestResultsIncrease) AS \"Test Count\"\nFROM data_ctp\nWHERE\n  $__timeFilter(date) AND\n  state IN ($state)\nGROUP BY 1\nORDER BY $__timeGroup(date,$__interval)",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "totalTestResultsIncrease"
+                ],
+                "type": "column"
+              },
+              {
+                "params": [
+                  "sum"
+                ],
+                "type": "aggregate"
+              },
+              {
+                "params": [
+                  "Test Count"
+                ],
+                "type": "alias"
+              }
+            ]
+          ],
+          "table": "data_ctp",
+          "timeColumn": "date",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            },
+            {
+              "datatype": "varchar",
+              "name": "",
+              "params": [
+                "state",
+                "IN",
+                "($state)"
+              ],
+              "type": "expression"
+            }
+          ]
+        },
+        {
+          "format": "time_series",
+          "group": [
+            {
+              "params": [
+                "$__interval",
+                "none"
+              ],
+              "type": "time"
+            }
+          ],
+          "metricColumn": "none",
+          "rawQuery": false,
+          "rawSql": "SELECT\n  $__timeGroupAlias(date,$__interval),\n  sum(positiveIncrease) AS \"Positive Count\"\nFROM data_ctp\nWHERE\n  $__timeFilter(date) AND\n  state IN ($state)\nGROUP BY 1\nORDER BY $__timeGroup(date,$__interval)",
+          "refId": "B",
+          "select": [
+            [
+              {
+                "params": [
+                  "positiveIncrease"
+                ],
+                "type": "column"
+              },
+              {
+                "params": [
+                  "sum"
+                ],
+                "type": "aggregate"
+              },
+              {
+                "params": [
+                  "Positive Count"
+                ],
+                "type": "alias"
+              }
+            ]
+          ],
+          "table": "data_ctp",
+          "timeColumn": "date",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            },
+            {
+              "datatype": "varchar",
+              "name": "",
+              "params": [
+                "state",
+                "IN",
+                "($state)"
+              ],
+              "type": "expression"
+            }
+          ]
+        },
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  date AS \"time\",\n  (SUM(positiveIncrease) / SUM(totalTestResultsIncrease) * 100) as \"Positive %\"\nFROM data_ctp\nWHERE\n  state in ($state) AND $__timeFilter(date)\nGROUP BY 1\nORDER BY $__timeGroup(date,$__interval)",
+          "refId": "C",
+          "select": [
+            [
+              {
+                "params": [
+                  "positive"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "data_ctp",
+          "timeColumn": "date",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        },
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  date AS \"time\",\n  (SUM(positiveIncrease) / SUM(totalTestResultsIncrease) * 100) as \"US Avg. %\"\nFROM data_ctp\nWHERE\n  $__timeFilter(date)\nGROUP BY 1\nORDER BY $__timeGroup(date,$__interval)",
+          "refId": "D",
+          "select": [
+            [
+              {
+                "params": [
+                  "positive"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "data_ctp",
+          "timeColumn": "date",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Daily Positives vs. Daily Tests",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "transparent": true,
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "decimals": 1,
+          "format": "percent",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": true,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "CovidSource Aurora",
+      "description": "",
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 12,
+        "y": 21
+      },
+      "hiddenSeries": false,
+      "hideTimeOverride": true,
+      "id": 4,
+      "legend": {
+        "alignAsTable": false,
+        "avg": false,
+        "current": false,
+        "hideEmpty": false,
+        "hideZero": false,
+        "max": false,
+        "min": false,
+        "rightSide": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": false,
+      "linewidth": 0,
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": [
+          {
+            "targetBlank": true,
+            "title": "Data by The COVID Tracking Project",
+            "url": "https://covidtracking.com/"
+          }
+        ]
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [
+        {
+          "alias": "Deaths",
+          "color": "#F2495C"
+        }
+      ],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "format": "time_series",
+          "group": [
+            {
+              "params": [
+                "$__interval",
+                "none"
+              ],
+              "type": "time"
+            }
+          ],
+          "metricColumn": "none",
+          "rawQuery": false,
+          "rawSql": "SELECT\n  $__timeGroupAlias(date,$__interval),\n  sum(deathIncrease) AS \"Deaths\"\nFROM data_ctp\nWHERE\n  $__timeFilter(date) AND\n  state IN ($state)\nGROUP BY 1\nORDER BY $__timeGroup(date,$__interval)",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "deathIncrease"
+                ],
+                "type": "column"
+              },
+              {
+                "params": [
+                  "sum"
+                ],
+                "type": "aggregate"
+              },
+              {
+                "params": [
+                  "Deaths"
+                ],
+                "type": "alias"
+              }
+            ]
+          ],
+          "table": "data_ctp",
+          "timeColumn": "date",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            },
+            {
+              "datatype": "varchar",
+              "name": "",
+              "params": [
+                "state",
+                "IN",
+                "($state)"
+              ],
+              "type": "expression"
+            }
+          ]
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "New Daily Deaths",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "transparent": true,
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "decimals": 0,
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "decimals": 0,
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "columns": [],
+      "datasource": "CovidSource Aurora",
+      "description": "This data is compiled by The New York Times. County-level totals may differ from other data sets present on the dashboard.",
+      "fontSize": "100%",
+      "gridPos": {
+        "h": 7,
+        "w": 24,
+        "x": 0,
+        "y": 28
+      },
+      "id": 34,
+      "pageSize": null,
+      "showHeader": true,
+      "sort": {
+        "col": 2,
+        "desc": true
+      },
+      "styles": [
+        {
+          "alias": "",
+          "align": "left",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "decimals": 0,
+          "pattern": "Cases",
+          "thresholds": [],
+          "type": "number",
+          "unit": "locale"
+        },
+        {
+          "alias": "",
+          "align": "auto",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 0,
+          "mappingType": 1,
+          "pattern": "Deaths",
+          "thresholds": [],
+          "type": "number",
+          "unit": "locale"
+        }
+      ],
+      "targets": [
+        {
+          "format": "table",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT state_abbv as State, county as County, cases as Cases, ROUND((cases / $total_cases) * 100,2) as 'Case %', deaths as Deaths, ROUND((deaths / $total_deaths) * 100,2) as 'Deaths %' from data_nyt_county WHERE state_abbv IN ($state) AND date = (SELECT MAX( date ) FROM data_nyt_county WHERE state_abbv IN ($state)) ORDER BY cases DESC;",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "timeColumn": "time",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "County-level Impact",
+      "transform": "table",
+      "transparent": true,
+      "type": "table"
+    },
+    {
+      "collapsed": false,
+      "datasource": null,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 35
+      },
+      "id": 36,
+      "panels": [],
+      "title": "Credits & Links",
+      "type": "row"
+    },
+    {
+      "content": "<div style=\"font-family: 'Source Code Pro', monospace;text-align:center;\">\n</br>\n<p>This data is sourced from <a href=\"https://covidtracking.com/\" target=\"_blank\">The COVID Tracking Project</a>, <a href=\"https://www.nytimes.com/interactive/2020/us/coronavirus-us-cases.html\" target=\"_blank\">The New York Times</a>, the <a href=\"https://census.gov\" target=\"_blank\">US Census Bureau</a>, the <a href=\"https://covid19.healthdata.org/projections\" target=\"_blank\">IHME</a> and <a href=\"https://www.google.com/covid19/mobility\" target=\"_blank\">Google</a>.\n</div>",
+      "datasource": null,
+      "gridPos": {
+        "h": 2,
+        "w": 24,
+        "x": 0,
+        "y": 36
+      },
+      "id": 12,
+      "mode": "html",
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "",
+      "transparent": true,
+      "type": "text"
+    },
+    {
+      "content": "<div style=\"font-family: 'Source Code Pro', monospace;text-align:center;margin-top:10px;\">\n<table style=\"width:100%;border:none !important;margin-top:10px;\" border=0> \n    <tr style=\"text-align:center;border:none !important;\"> \n        <td width=\"30%\" style=\"border:none !important;\"><h1><a style=\"color:darkgray;\" href=\"https://www.youtube.com/channel/UC_D6qpdhkoJJZE_CGFyVhog\" target=\"_blank\"><img height=30 src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Logo_of_YouTube_%282015-2017%29.svg/502px-Logo_of_YouTube_%282015-2017%29.svg.png\"/></a></h1><small>watch the build</small></td>\n        <td width=\"30%\" style=\"border:none !important;\"><h1><a style=\"color:darkgray;\" href=\"https://www.twitch.tv/hrudotsh\" target=\"_blank\"><img height=30 src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Twitch_logo.svg/455px-Twitch_logo.svg.png\"/></a></h1><small>stream it live</small></td>\n        <td width=\"30%\" style=\"border:none !important;\"><h1><a style=\"color:darkgray;\" href=\"https://github.com/hrushka/covidsource\" target=\"_blank\"><img width=80 src=\"https://github.githubassets.com/images/modules/logos_page/GitHub-Logo.png\"/></a></h1><small>get the code</small></td>\n    </tr>\n</table>\n<small>Follow, use and contribute. ❤ &mdash; Matt <<a href=\"mailto:c19@hru.sh\">c19@hru.sh</a>><br/>v1.20200402</small>\n</div>",
+      "datasource": null,
+      "gridPos": {
+        "h": 5,
+        "w": 24,
+        "x": 0,
+        "y": 38
+      },
+      "id": 18,
+      "mode": "html",
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "",
+      "transparent": true,
+      "type": "text"
+    }
+  ],
+  "refresh": false,
+  "schemaVersion": 22,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "allValue": "",
+        "current": {
+          "selected": true,
+          "tags": [],
+          "text": "Georgia",
+          "value": "GA"
+        },
+        "datasource": "CovidSource Aurora",
+        "definition": "select state_abbv as __value, state_full as __text from data_us_data;",
+        "hide": 0,
+        "includeAll": true,
+        "index": -1,
+        "label": "Select a State",
+        "multi": false,
+        "name": "state",
+        "options": [],
+        "query": "select state_abbv as __value, state_full as __text from data_us_data;",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allValue": null,
+        "current": {
+          "text": "10617423",
+          "value": "10617423"
+        },
+        "datasource": "CovidSource Aurora",
+        "definition": "SELECT SUM(usc_population_2019) as pop\nFROM data_us_data\nWHERE\n  state_abbv IN ($state)",
+        "hide": 2,
+        "includeAll": false,
+        "index": -1,
+        "label": null,
+        "multi": false,
+        "name": "population",
+        "options": [],
+        "query": "SELECT SUM(usc_population_2019) as pop\nFROM data_us_data\nWHERE\n  state_abbv IN ($state)",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allValue": null,
+        "current": {
+          "text": "211.9551764920045",
+          "value": "211.9551764920045"
+        },
+        "datasource": "CovidSource Aurora",
+        "definition": "SELECT AVG(usc_density_2019) as density\nFROM data_us_data\nWHERE\n  state_abbv IN ($state)",
+        "hide": 2,
+        "includeAll": false,
+        "index": -1,
+        "label": null,
+        "multi": false,
+        "name": "density",
+        "options": [],
+        "query": "SELECT AVG(usc_density_2019) as density\nFROM data_us_data\nWHERE\n  state_abbv IN ($state)",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allValue": null,
+        "current": {
+          "text": "20099",
+          "value": "20099"
+        },
+        "datasource": "CovidSource Aurora",
+        "definition": "SELECT SUM(cases) as cases\nFROM data_nyt_county \nWHERE state_abbv IN ($state) \nAND date = (SELECT MAX( date ) FROM data_nyt_county WHERE state_abbv IN ($state))",
+        "hide": 2,
+        "includeAll": false,
+        "index": -1,
+        "label": null,
+        "multi": false,
+        "name": "total_cases",
+        "options": [],
+        "query": "SELECT SUM(cases) as cases\nFROM data_nyt_county \nWHERE state_abbv IN ($state) \nAND date = (SELECT MAX( date ) FROM data_nyt_county WHERE state_abbv IN ($state))",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allValue": null,
+        "current": {
+          "text": "837",
+          "value": "837"
+        },
+        "datasource": "CovidSource Aurora",
+        "definition": "SELECT SUM(deaths) as deaths\nFROM data_nyt_county \nWHERE state_abbv IN ($state) \nAND date = (SELECT MAX( date ) FROM data_nyt_county WHERE state_abbv IN ($state))",
+        "hide": 2,
+        "includeAll": false,
+        "index": -1,
+        "label": null,
+        "multi": false,
+        "name": "total_deaths",
+        "options": [],
+        "query": "SELECT SUM(deaths) as deaths\nFROM data_nyt_county \nWHERE state_abbv IN ($state) \nAND date = (SELECT MAX( date ) FROM data_nyt_county WHERE state_abbv IN ($state))",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      }
+    ]
+  },
+  "time": {
+    "from": "now-45d",
+    "to": "now"
+  },
+  "timepicker": {
+    "refresh_intervals": [
+      "5s",
+      "10s",
+      "30s",
+      "1m",
+      "5m",
+      "15m",
+      "30m",
+      "1h",
+      "2h",
+      "1d"
+    ]
+  },
+  "timezone": "",
+  "title": "COVID-19 US State Data",
+  "uid": "4S5AN4CZz",
+  "variables": {
+    "list": []
+  },
+  "version": 50
+}

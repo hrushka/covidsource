@@ -21,7 +21,8 @@ const data_states = require('../../../static/us_states.json')
 */
 module.exports.run = async _ => {
 
-  const response = await fetch(config.sources.google.dataUrl)
+  const cb = crypto.createHash('md5').update(moment().toString()).digest("hex")
+  const response = await fetch(`${config.sources.google.dataUrl}?cachebust=${cb}`)
   const input = await response.text()
 
   const records = parse(input, {
