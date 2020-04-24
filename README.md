@@ -20,7 +20,6 @@ Below are the current data sources being populated.
 |              Google Mobility Data | [google.com](https://www.google.com/covid19/mobility)        | ingest_gog *  | [CSV](https://www.gstatic.com/covid19/mobility/Global_Mobility_Report.csv) |
 |  Eric Celeste / US County GeoJSON | [eric.clst.org](https://eric.clst.org/tech/usgeojson/)       | -             | [JSON](https://eric.clst.org/assets/wiki/uploads/Stuff/gz_2010_us_050_00_20m.json) |
 
-> \* the Google data source currently takes longer than the 30 second lambda timeout so can currently only be ingested manually. This can be done by setting the `AURORA_HOST` environment variable.
 
 ## use & contribute
 
