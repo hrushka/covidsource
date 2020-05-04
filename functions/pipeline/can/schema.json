@@ -1,0 +1,82 @@
+{
+    "name": "can",
+    "indexes":[
+        ["date","stateName"],
+        ["date","stateName","countyName"]
+    ],
+    "fields": {
+        "date": {
+            "type": "timestamp",
+            "format": "YYYY-MM-DD"
+        },
+        "stateName": {
+            "type": "string",
+            "maxLength": 50
+        },
+        "state_abbv": {
+            "type": "string",
+            "maxLength": 2
+        },
+        "countyName": {
+            "type": "string",
+            "maxLength": 50
+        },
+        "countryName": {
+            "type": "string",
+            "maxLength": 50
+        },
+        "intervention": {
+            "type": "string",
+            "maxLength": 50
+        },
+        "hospitalBedsRequired": {
+            "type": "int"
+        },
+        "hospitalBedCapacity": {
+            "type": "int"
+        },
+        "ICUBedsInUse": {
+            "type": "int"
+        },
+        "ICUBedCapacity": {
+            "type": "int"
+        },
+        "ventilatorsInUse": {
+            "type": "int"
+        },
+        "ventilatorCapacity": {
+            "type": "int"
+        },
+        "cumulativeDeaths": {
+            "type": "int"
+        },
+        "cumulativeInfected": {
+            "type": "int"
+        },
+        "cumulativePositiveTests": {
+            "type": "int"
+        },
+        "cumulativeNegativeTests": {
+            "type": "int"
+        },
+        "hash": {
+            "type": "string",
+            "maxLength": 50,
+            "primary_key": true
+        },
+        "lastUpdatedDate": {
+            "type": "timestamp",
+            "format": "YYYY-MM-DD"
+        },
+        "fips": {
+            "type": "string",
+            "maxLength": 10
+        },
+        "lat":{
+            "type": "double"
+        },
+        "long":{
+            "type": "double"
+        }
+    }
+}

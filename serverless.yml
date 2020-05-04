@@ -100,3 +100,13 @@ functions:
     timeout: 900
     events:
       - schedule: rate(12 hours)
+  ingest_rt:
+    handler: handler.ingest_rt
+    timeout: 60
+    events:
+      - schedule: rate(6 hours)
+  ingest_can:
+    handler: handler.ingest_can
+    timeout: 60
+    events:
+      - schedule: rate(6 hours)

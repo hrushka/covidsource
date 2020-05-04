@@ -1,0 +1,42 @@
+{
+    "name": "rtlive",
+    "indexes":[
+        ["date","region"]
+    ],
+    "fields": {
+        "date": {
+            "type": "timestamp",
+            "format": "YYYY-MM-DD"
+        },
+        "region": {
+            "type": "string",
+            "maxLength": 2
+        },
+        "mean": {
+            "type": "double"
+        },
+        "median": {
+            "type": "double"
+        },
+        "lower_90": {
+            "type": "double"
+        },
+        "upper_90": {
+            "type": "double"
+        },
+        "lower_50": {
+            "type": "double"
+        },
+        "upper_50": {
+            "type": "double"
+        },
+        "Wikipedia": {
+            "type": "int"
+        },
+        "hash": {
+            "type": "string",
+            "maxLength": 50,
+            "primary_key": true
+        }
+    }
+}

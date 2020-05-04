@@ -15,7 +15,8 @@ class Datastore {
         if (!Datastore.instance) {
             this.client = Client({
                 config: {
-                    host: process.env.AURORA_HOST,
+                    //host: process.env.AURORA_HOST,
+                    host: 'covidsource-prod-aurorardscluster-7qbcu285p7mw.cluster-cjbgyiupwga6.us-east-1.rds.amazonaws.com',
                     database: process.env.DB_NAME,
                     user: process.env.USERNAME,
                     password: process.env.PASSWORD
@@ -64,7 +65,7 @@ class Datastore {
                     default:
                 }
 
-                fields.push(field)
+                fields.push(`\`${field}\``)
                 values.push(value)
             }
 
@@ -113,7 +114,7 @@ class Datastore {
                 type += ' PRIMARY KEY'
             }
 
-            fields.push(`${elm} ${type}`)
+            fields.push(`\`${elm}\` ${type}`)
         })
 
         let indexes = []

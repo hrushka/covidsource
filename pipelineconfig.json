@@ -30,6 +30,18 @@
             "url":"https://www.google.com/covid19/mobility",
             "Description":"COVID⁠-⁠19 mobility trends in countries/regions and cities. Reports are published weekly and reflect requests for directions in Google Places.",
             "dataUrl":"https://www.gstatic.com/covid19/mobility/Global_Mobility_Report.csv"
+        },
+        "rtlive":{
+            "name":"Effective Reproduction Numbers",
+            "url":"https://rt.live/",
+            "Description":"The metric being tracked here (Rt) represents the effective reproduction rate of the virus calculated for each locale.",
+            "dataUrl":"https://d14wlfuexuxgcm.cloudfront.net/covid/rt.csv"
+        },
+        "can":{
+            "name":"Covid ActNow ",
+            "url":"https://covidactnow.org/",
+            "Description":"Real-time modeling and metrics. All 50 states. 2,100+ counties.",
+            "dataUrl":"https://data.covidactnow.org/latest/us/states.OBSERVED_INTERVENTION.timeseries.csv"
         }
     }
 }
