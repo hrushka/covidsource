@@ -17,8 +17,8 @@ Below are the current data sources being populated.
 | US Census Data / 2019 projections | [census.gov](https://www.census.gov/) | ingest_us | `manual` | [API](https://api.census.gov/data/2019/pep/population?get=NAME,COUNTY,STATE,DENSITY,POP&for=county:*) |
 |        New York Times County Data | [nyt.com](https://www.nytimes.com/article/coronavirus-county-data-us.html) | ingest_nyt    | `3 hours` | [CSV](https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-counties.csv) |
 |               Apple Mobility Data | [apple.com](https://www.apple.com/covid19/mobility)          | ingest_apl    | `12 hours` | [CSV](https://www.apple.com/covid19/mobility)                |
-|              Google Mobility Data | [google.com](https://www.google.com/covid19/mobility)        | ingest_gog *  | `12 hours` | [CSV](https://www.gstatic.com/covid19/mobility/Global_Mobility_Report.csv) |
-| COVID ActNow OBSERVED | [covidactnow.org](https://covidactnow.org) | ingest_can | `6 hours` | [CSV](https://data.covidactnow.org/latest/us/states.OBSERVED_INTERVENTION.timeseries.csv) |
+|              Google Mobility Data | [google.com](https://www.google.com/covid19/mobility)        | ingest_gog  | `12 hours` | [CSV](https://www.gstatic.com/covid19/mobility/Global_Mobility_Report.csv) |
+| COVID Act Now OBSERVED | [covidactnow.org](https://covidactnow.org) | ingest_can | `6 hours` | [CSV](https://data.covidactnow.org/latest/us/states.OBSERVED_INTERVENTION.timeseries.csv) |
 |  Eric Celeste / US County GeoJSON | [eric.clst.org](https://eric.clst.org/tech/usgeojson/)       | -             | `6 hours`    | [JSON](https://eric.clst.org/assets/wiki/uploads/Stuff/gz_2010_us_050_00_20m.json) |
 
 
