@@ -30,7 +30,7 @@
         "upper_50": {
             "type": "double"
         },
-        "Wikipedia": {
+        "new_cases": {
             "type": "int"
         },
         "hash": {

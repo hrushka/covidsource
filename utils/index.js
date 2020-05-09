@@ -15,8 +15,7 @@ class Datastore {
         if (!Datastore.instance) {
             this.client = Client({
                 config: {
-                    //host: process.env.AURORA_HOST,
-                    host: 'covidsource-prod-aurorardscluster-7qbcu285p7mw.cluster-cjbgyiupwga6.us-east-1.rds.amazonaws.com',
+                    host: process.env.AURORA_HOST,
                     database: process.env.DB_NAME,
                     user: process.env.USERNAME,
                     password: process.env.PASSWORD
