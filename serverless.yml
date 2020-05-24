@@ -94,8 +94,6 @@ functions:
     handler: handler.ingest_apl
     timeout: 120
     memorySize: 1024
-    events:
-      - schedule: rate(12 hours)
   ingest_gog:
     handler: handler.ingest_gog
     timeout: 900
