@@ -80,16 +80,12 @@ functions:
   ingest_ctp:
     handler: handler.ingest_ctp
     timeout: 60
-    events:
-      - schedule: rate(1 hour)
   ingest_us:
     handler: handler.ingest_us
     timeout: 60
   ingest_nyt:
     handler: handler.ingest_nyt
-    timeout: 120
-    events:
-      - schedule: rate(3 hours)
+    timeout: 256
   ingest_apl:
     handler: handler.ingest_apl
     timeout: 120
@@ -98,15 +94,9 @@ functions:
     handler: handler.ingest_gog
     timeout: 900
     memorySize: 1024
-    events:
-      - schedule: rate(12 hours)
   ingest_rt:
     handler: handler.ingest_rt
     timeout: 60
-    events:
-      - schedule: rate(6 hours)
   ingest_can:
     handler: handler.ingest_can
     timeout: 60
-    events:
-      - schedule: rate(6 hours)

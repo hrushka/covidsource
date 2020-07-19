@@ -1,5 +1,5 @@
 {
-    "name": "rtlive",
+    "name": "rtlive", 
     "indexes":[
         ["date","region"]
     ],
@@ -18,19 +18,19 @@
         "median": {
             "type": "double"
         },
-        "lower_90": {
+        "lower_80": {
             "type": "double"
         },
-        "upper_90": {
-            "type": "double"
-        },
-        "lower_50": {
-            "type": "double"
-        },
-        "upper_50": {
+        "upper_80": {
             "type": "double"
         },
         "new_cases": {
+            "type": "int"
+        },
+        "new_deaths": {
+            "type": "int"
+        },
+        "new_tests": {
             "type": "int"
         },
         "hash": {

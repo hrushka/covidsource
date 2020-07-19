@@ -35,6 +35,9 @@ module.exports.run = async _ => {
     const hash_id = `${rec.date}_${rec.countryName}_${rec.stateName}_${rec.countyName}`
     records[r].hash = crypto.createHash('md5').update(hash_id).digest("hex")
     records[r].state_abbv = data_states[rec.stateName]
+    records[r].countyName = (rec.countyName !== undefined && rec.countyName !== "")
+      ? records[r].countyName
+      : "Unknown"
   }
 
   // Initialize Database if it hasn't been

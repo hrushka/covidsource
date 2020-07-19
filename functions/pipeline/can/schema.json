@@ -53,12 +53,6 @@
         "cumulativeInfected": {
             "type": "int"
         },
-        "cumulativePositiveTests": {
-            "type": "int"
-        },
-        "cumulativeNegativeTests": {
-            "type": "int"
-        },
         "hash": {
             "type": "string",
             "maxLength": 50,
@@ -67,16 +61,6 @@
         "lastUpdatedDate": {
             "type": "timestamp",
             "format": "YYYY-MM-DD"
-        },
-        "fips": {
-            "type": "string",
-            "maxLength": 10
-        },
-        "lat":{
-            "type": "double"
-        },
-        "long":{
-            "type": "double"
         }
     }
 }

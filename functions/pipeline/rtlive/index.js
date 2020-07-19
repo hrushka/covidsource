@@ -30,6 +30,9 @@ module.exports.run = async _ => {
   for (var r in records) {
     const rec = records[r]
     const hash_id = `${rec.date}_${rec.region}`
+    records[r].new_cases = +records[r].new_cases || 0
+    records[r].new_deaths = +records[r].new_deaths || 0
+    records[r].new_tests = +records[r].new_tests || 0
     records[r].hash = crypto.createHash('md5').update(hash_id).digest("hex")
   }
 
